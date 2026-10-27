@@ -11,6 +11,34 @@
 
 const productGrid = document.querySelector("#products");
 
+/* COLORFUL SAMPLE ART: replaced automatically by any uploaded image. */
+const demoStickers = {
+ "retro-computer-club":["🖥️","RETRO CLUB","#d8f3e8","#4a8b83"],
+ "floppy-disk-friends":["💾","SAVE ME!","#dce8ff","#567ac5"],
+ "pixel-heart":["💗","PIXEL LOVE","#ffe0e8","#dd6391"],
+ "happy-macintosh":["🖥️","HELLO!","#fff0ce","#bd8954"],
+ "space-explorer":["🚀","SPACE CLUB","#e4d9ff","#8066c6"],
+ "rainbow-cassette":["📼","MIXTAPE","#ffe3d2","#e18c65"],
+ "tiny-robot":["🤖","BEEP BOOP","#d6f6f3","#4a9f9a"],
+ "arcade-dreams":["🕹️","HIGH SCORE","#f9d9f7","#ad62ad"],
+ "cosmic-cat":["🐈","STAR CAT","#dfe5ff","#6b79bd"],
+ "mystery-sticker":["🎁","SURPRISE!","#fff0c9","#c99a3f"]
+};
+function makeDemoSticker(id) {
+  const data = demoStickers[id] || ["✨","NEW DROP","#e8e5ff","#6854a9"];
+  const stage = element("div", "demo-stage");
+  stage.style.setProperty("--demo-bg",data[2]);
+  stage.style.setProperty("--demo-ink",data[3]);
+  const sticker = element("div","demo-diecut");
+  sticker.append(element("span","demo-sparkle","✦ ★ ✦"));
+  sticker.append(element("span","demo-emoji",data[0]));
+  sticker.append(element("span","demo-wordmark",data[1]));
+  sticker.append(element("span","demo-caption","LITTLE STICKER DROPS"));
+  stage.append(sticker);
+  return stage;
+}
+
+
 /** Converts a number into a US-dollar price, like $4.00. */
 function formatPrice(amount) {
   return new Intl.NumberFormat("en-US", {
@@ -56,9 +84,8 @@ function renderProduct(product) {
     img.loading = "lazy";
     art.append(img);
   } else {
-    // Friendly placeholder while you haven't uploaded an image.
-    const placeholder = element("div", "sticker", "✦ " + String(product.name || "New sticker") + " ✦");
-    art.append(placeholder);
+    // Demo art appears only when no real image path is supplied.
+    art.append(makeDemoSticker(String(product.id || "")));
   }
 
   const details = element("div", "details");
