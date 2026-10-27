@@ -1,0 +1,13 @@
+{
+  "_help": "Add your own graphic design projects here. Each item has a title, category, description, image path, and optional public project link. Never add private client work without permission.",
+  "projects": [
+    {
+      "title": "Your first design project",
+      "category": "Graphic Design · Portfolio placeholder",
+      "description": "Replace this with a real branding, poster, illustration, or typography project.",
+      "image": "",
+      "url": "",
+      "visible": true
+    }
+  ]
+}
