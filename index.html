@@ -1,26 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!--
-    LITTLE STICKER DROPS — HOME PAGE
-    =================================
-    HTML is the skeleton of the website.
-    CSS (style.css) controls its colors, spacing, and appearance.
-
-    Beginner tip: comments like this are ignored by the browser.
-    You can use them to leave notes for your future self!
-  -->
+  <!-- HTML = page structure. CSS = appearance. JavaScript = product cards. -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Little Sticker Drops: limited-edition collectible stickers.">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>Little Sticker Drops</title>
-
-  <!-- Relative paths work on GitHub Pages, even inside a project folder. -->
   <link rel="stylesheet" href="style.css">
+  <!-- defer means load the script without blocking the page. -->
+  <script src="catalog.js" defer></script>
 </head>
 <body>
-  <!-- HEADER: shown at the top of the page. -->
   <header>
     <a class="logo" href="./">✦ Little Sticker Drops</a>
     <nav aria-label="Main navigation">
@@ -30,98 +21,34 @@
   </header>
 
   <main>
-    <!-- HERO: the big welcome area visitors see first. -->
-    <section class="hero" aria-labelledby="hero-title">
+    <!-- HERO: the welcome area. -->
+    <section class="hero">
       <span class="eyebrow">SMALL BATCH • BIG PERSONALITY</span>
-      <h1 id="hero-title">Tiny art.<br><em>Limited drops.</em></h1>
-      <p>
-        Collectible stickers released in small editions.
-        Once a drop sells out, it joins the archive.
-      </p>
+      <h1>Tiny art.<br><em>Limited drops.</em></h1>
+      <p>Collectible stickers released in small editions. Once a drop sells out, it joins the archive.</p>
       <a class="button" href="#drops">Explore the first drop ↓</a>
     </section>
 
     <!--
-      PRODUCT CARD: DROP #001
-      =======================
-      START HERE when changing your first sticker.
-
-      To customize:
-      1. Change the name inside <h3>.
-      2. Change the price in the element with class="price".
-      3. Change the edition size (currently 25).
-      4. Replace the decorative computer artwork when ready.
-
-      IMPORTANT: "25 of 25" is DEMO text, not live inventory.
-      eBay must be the source of truth for how many remain.
+      PRODUCT CATALOG
+      ===============
+      To add, hide, or edit stickers, open products.json.
+      catalog.js automatically builds the cards inside #products.
+      You never have to copy/paste HTML for each new sticker.
     -->
     <section id="drops" class="section" aria-labelledby="drops-title">
-      <p class="eyebrow">DROP 001 · DEMO PRODUCT</p>
+      <p class="eyebrow">THE COLLECTION</p>
       <h2 id="drops-title">Meet the collection</h2>
-
-      <article class="product">
-        <!-- Pure CSS artwork: no external image downloads or dependencies. -->
-        <div class="art" aria-label="Illustration of a smiling vintage computer">
-          <div class="sticker">
-            <div class="computer" aria-hidden="true">
-              <div class="screen">^‿^</div>
-              <div class="slot"></div>
-            </div>
-            <span>RETRO COMPUTER CLUB</span>
-          </div>
-        </div>
-
-        <div class="details">
-          <span class="pill">LIMITED EDITION · SAMPLE</span>
-          <h3>Retro Computer Club</h3>
-          <p>A cheerful tribute to classic computers and the people who love them.</p>
-
-          <!-- EXAMPLE PRICE: change this when you decide on a real price. -->
-          <strong class="price">$4.00 <small>example price</small></strong>
-
-          <!-- EDITION SIZE: the total number you plan to make. -->
-          <p><strong>Edition size:</strong> 25 stickers</p>
-
-          <!-- Decorative demo bar: 100% filled, NOT connected to eBay. -->
-          <div class="meter" aria-hidden="true"><span></span></div>
-          <p class="muted">25 of 25 shown in demo inventory. Not synchronized with eBay.</p>
-
-          <!--
-            EBAY CHECKOUT — NOT ACTIVE YET
-            =================================
-            Once you have a verified eBay listing, replace the <span> below
-            with a link like this (using YOUR real listing URL):
-
-            <a class="button" href="YOUR_REAL_EBAY_LISTING_URL"
-               rel="noopener noreferrer">Buy on eBay</a>
-
-            Never paste passwords, payment keys, or customer details here.
-            Keep this disabled until the product is actually for sale.
-          -->
-          <span class="button disabled" aria-disabled="true">
-            Coming soon — eBay listing pending
-          </span>
-          <p class="muted">
-            Purchases will be completed securely on eBay once a listing is connected.
-          </p>
-        </div>
-      </article>
+      <div id="products" class="products" aria-live="polite"></div>
     </section>
 
-    <!-- Extra information and a link to the store's policies. -->
-    <section class="section info" aria-labelledby="collectors-title">
-      <h2 id="collectors-title">Made for collectors</h2>
-      <p>
-        Small editions, clear quantities, and simple envelope-friendly shipping.
+    <section class="section info">
+      <h2>Made for collectors</h2>
+      <p>Small editions, clear quantities, and simple envelope-friendly shipping.
         See our <a href="policies.html">shipping and returns policy</a> before ordering.
       </p>
     </section>
   </main>
-
-  <!-- FOOTER: the closing information at the bottom of the page. -->
-  <footer>
-    © Little Sticker Drops · Independent sticker shop ·
-    <a href="policies.html">Policies</a>
-  </footer>
+  <footer>© Little Sticker Drops · Independent sticker shop · <a href="policies.html">Policies</a></footer>
 </body>
 </html>
