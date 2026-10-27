@@ -88,7 +88,7 @@ h2 { font-size: 2.4rem; margin: 10px 0 30px; }
   box-shadow: 9px 9px 0 #d8d1fa;
 }
 
-/* 6. RETRO COMPUTER ART — drawn entirely using CSS */
+/* 6. STICKER ART CONTAINER AND LEGACY ILLUSTRATION STYLES */
 .art {
   min-height: 420px;
   background: radial-gradient(circle, #ffe7b0 0 20%, #f4b8cb 70%);
@@ -161,8 +161,7 @@ footer { padding: 28px; text-align: center; background: #24243c; color: white; f
 }
 
 /* 10. CATALOG: cards are generated from products.json by catalog.js. */
-.products { display: grid; gap: 28px; }
-.product-image img { display: block; width: 100%; height: 100%; max-height: 430px; object-fit: contain; }
+.product-image img { display: block; width: 100%; height: 100%; max-height: 100%; object-fit: contain; }
 .product-image .sticker { max-width: 100%; overflow-wrap: anywhere; }
 
 /*
@@ -224,12 +223,8 @@ footer { padding: 28px; text-align: center; background: #24243c; color: white; f
 .portfolio-placeholder { font-weight: 900; letter-spacing: .12em; color: #6854a9; }
 .portfolio-link { display: inline-block; font-weight: 800; margin-top: 8px; }
 
-/* 13. Portfolio availability notice and GitHub link */
-.portfolio-intro { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:22px; padding:24px; margin:24px 0; background:#e8e5ff; border-radius:20px; }
-.portfolio-intro > div { flex:1 1 260px; }
-.portfolio-intro strong { font-size:1.2rem; }
-.portfolio-intro p { line-height:1.6; margin-bottom:0; }
-.portfolio-intro .button { flex-shrink:0; }
+/* 13. Portfolio spacing */
+.portfolio-grid { margin-top: 32px; }
 
 /* 14. TEN SAMPLE STICKER ILLUSTRATIONS
    These decorative demo designs appear whenever product.image is empty.
@@ -241,3 +236,9 @@ footer { padding: 28px; text-align: center; background: #24243c; color: white; f
 .demo-emoji { font-size:4.5rem; line-height:1.25; filter:drop-shadow(2px 5px 0 #24243c16); }
 .demo-wordmark { font-size:clamp(1.05rem,2vw,1.35rem); font-weight:1000; letter-spacing:.045em; line-height:1.15; }
 .demo-caption { font-size:.55rem; font-weight:900; letter-spacing:.14em; margin-top:6px; }
+\n/* 15. ACCESSIBILITY AND MOBILE POLISH */
+.products { overscroll-behavior-inline: contain; }
+.products .product { min-width: 0; }
+.products .details { overflow-wrap: anywhere; }
+@media (max-width: 700px) { nav { flex-wrap: wrap; } .section { padding: 56px 20px; } h2 { font-size: clamp(1.8rem, 7vw, 2.4rem); } }
+@media (prefers-reduced-motion: reduce) { .products { scroll-behavior: auto; } }
