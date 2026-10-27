@@ -4,9 +4,9 @@
   <!-- HTML = page structure. CSS = appearance. JavaScript = product cards. -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Little Sticker Drops — collectible sticker art, limited-edition designs, and graphic design projects.">
+  <meta name="description" content="Curbside Stickers — original skate-inspired sticker art, limited-edition drops, and independent graphic design.">
   <meta name="referrer" content="strict-origin-when-cross-origin">
-  <title>Little Sticker Drops</title>
+  <title>Curbside Stickers</title>
   <link rel="stylesheet" href="style.css">
   <!-- defer means load the script without blocking the page. -->
   <script src="catalog.js" defer></script>
@@ -14,7 +14,7 @@
 </head>
 <body>
   <header>
-    <a class="logo" href="./">✦ Little Sticker Drops</a>
+    <a class="logo" href="./"><span class="logo-main">CURBSIDE</span><span class="logo-sub">STICKERS ✳</span></a>
     <nav aria-label="Main navigation">
       <a href="#drops">Sticker drops</a>
       <a href="#portfolio">Graphic design</a>
@@ -25,10 +25,12 @@
   <main>
     <!-- HERO: the welcome area. -->
     <section class="hero">
-      <span class="eyebrow">SMALL BATCH • BIG PERSONALITY</span>
-      <h1>Tiny art.<br><em>Limited drops.</em></h1>
-      <p>Collectible stickers released in small editions. Once a drop sells out, it joins the archive.</p>
-      <a class="button" href="#drops">Explore the first drop ↓</a>
+      <div class="hero-copy"><span class="eyebrow hero-tag">✳ INDEPENDENT STICKER CLUB ✳</span>
+      <h1>ART FOR<br><em>THE STREETS.</em></h1>
+      <p class="hero-kicker">STICKERS FOR EVERYTHING.</p>
+      <p>Weird little illustrations, retro inspiration, and small-batch sticker drops. Made for sketchbooks, laptops, boards, and everywhere in between.</p>
+      <a class="button" href="#drops">SEE THE STICKER DROPS ↗</a></div>
+      <div class="hero-art" aria-hidden="true"><div class="hero-sticker hero-smile">☺</div><div class="hero-sticker hero-bolt">⚡</div><div class="hero-sticker hero-skate">✳</div><div class="hero-scribble">CURBSIDE<br>CREW!</div></div>
     </section>
 
     <!--
@@ -39,30 +41,30 @@
       You never have to copy/paste HTML for each new sticker.
     -->
     <section id="drops" class="section" aria-labelledby="drops-title">
-      <p class="eyebrow">THE COLLECTION</p>
-      <h2 id="drops-title">Meet the collection</h2>
-      <p class="muted">Swipe to explore 10 designs. Tap an image to visit eBay when a listing is live.</p>
+      <p class="eyebrow">✳ DROP 001 / THE COLLECTION</p>
+      <h2 id="drops-title">STICKER <span class="highlight">DROPS!</span></h2>
+      <p class="muted">Swipe sideways to explore 10 colorful sample concepts. Finished artwork and eBay listings are coming later.</p>
       <div id="products" class="products" aria-label="Swipeable sticker collection"></div>
-      <p class="muted">Each design is a limited edition of 10. Actual availability is managed on eBay.</p>
+      <p class="muted">Planned: 10 per design. These are preview concepts, not available inventory; future sales and availability will be handled on eBay.</p>
     </section>
 
     <!-- PORTFOLIO: concise introduction, GitHub link, and optional project cards. -->
     <section id="portfolio" class="section" aria-labelledby="portfolio-heading">
-      <p class="eyebrow">DESIGN &amp; COLLABORATION</p>
-      <h2 id="portfolio-heading">Graphic design, beyond the stickers.</h2>
-      <p>Branding, illustration, and visual ideas. <strong>Open for graphic design projects and collaborations.</strong></p>
+      <p class="eyebrow">BEYOND THE STICKERS</p>
+      <h2 id="portfolio-heading">DESIGN FROM <span class="highlight">THE CURB.</span></h2>
+      <p>Illustration, branding, typography, and strange little ideas. <strong>Open for graphic design projects and collaborations.</strong></p>
       <a class="button" href="https://github.com/Wonka15" target="_blank" rel="noopener noreferrer">View my GitHub portfolio ↗</a>
       <!-- This stays empty until you publish real work in projects.json. -->
       <div id="portfolio-projects" class="portfolio-grid"></div>
     </section>
 
     <section class="section info">
-      <h2>Made for collectors</h2>
-      <p>Small editions, clear quantities, and simple envelope-friendly shipping.
+      <h2>SMALL RUNS. BIG ATTITUDE.</h2>
+      <p>Original designs, collectible drops, and a little skate-zine energy.
         See our <a href="policies.html">shipping and returns policy</a> before ordering.
       </p>
     </section>
   </main>
-  <footer>© Little Sticker Drops · Independent sticker shop · <a href="policies.html">Policies</a></footer>
+  <footer>© Curbside Stickers · Independent art &amp; sticker club · <a href="policies.html">Policies</a></footer>
 </body>
 </html>
