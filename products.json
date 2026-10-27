@@ -1,12 +1,111 @@
 {
-  "_help": "BEGINNER GUIDE: Each object inside products is one sticker. Duplicate an object to add a sticker. Change visible to false to hide it. Never put private customer data in this public file.",
+  "_help": "Showcase only. Each design is limited to 10 copies. Upload artwork to images/ and add a real eBay listing URL when ready. Do not store customer information here.",
   "products": [
     {
       "id": "retro-computer-club",
       "name": "Retro Computer Club",
       "description": "A cheerful tribute to classic computers and the people who love them.",
       "price": 4,
-      "editionSize": 25,
+      "editionSize": 10,
+      "image": "",
+      "ebayUrl": "",
+      "status": "coming-soon",
+      "visible": true
+    },
+    {
+      "id": "floppy-disk-friends",
+      "name": "Floppy Disk Friends",
+      "description": "Artwork and listing coming soon.",
+      "price": 4,
+      "editionSize": 10,
+      "image": "",
+      "ebayUrl": "",
+      "status": "coming-soon",
+      "visible": true
+    },
+    {
+      "id": "pixel-heart",
+      "name": "Pixel Heart",
+      "description": "Artwork and listing coming soon.",
+      "price": 4,
+      "editionSize": 10,
+      "image": "",
+      "ebayUrl": "",
+      "status": "coming-soon",
+      "visible": true
+    },
+    {
+      "id": "happy-macintosh",
+      "name": "Happy Macintosh",
+      "description": "Artwork and listing coming soon.",
+      "price": 4,
+      "editionSize": 10,
+      "image": "",
+      "ebayUrl": "",
+      "status": "coming-soon",
+      "visible": true
+    },
+    {
+      "id": "space-explorer",
+      "name": "Space Explorer",
+      "description": "Artwork and listing coming soon.",
+      "price": 4,
+      "editionSize": 10,
+      "image": "",
+      "ebayUrl": "",
+      "status": "coming-soon",
+      "visible": true
+    },
+    {
+      "id": "rainbow-cassette",
+      "name": "Rainbow Cassette",
+      "description": "Artwork and listing coming soon.",
+      "price": 4,
+      "editionSize": 10,
+      "image": "",
+      "ebayUrl": "",
+      "status": "coming-soon",
+      "visible": true
+    },
+    {
+      "id": "tiny-robot",
+      "name": "Tiny Robot",
+      "description": "Artwork and listing coming soon.",
+      "price": 4,
+      "editionSize": 10,
+      "image": "",
+      "ebayUrl": "",
+      "status": "coming-soon",
+      "visible": true
+    },
+    {
+      "id": "arcade-dreams",
+      "name": "Arcade Dreams",
+      "description": "Artwork and listing coming soon.",
+      "price": 4,
+      "editionSize": 10,
+      "image": "",
+      "ebayUrl": "",
+      "status": "coming-soon",
+      "visible": true
+    },
+    {
+      "id": "cosmic-cat",
+      "name": "Cosmic Cat",
+      "description": "Artwork and listing coming soon.",
+      "price": 4,
+      "editionSize": 10,
+      "image": "",
+      "ebayUrl": "",
+      "status": "coming-soon",
+      "visible": true
+    },
+    {
+      "id": "mystery-sticker",
+      "name": "Mystery Sticker",
+      "description": "Artwork and listing coming soon.",
+      "price": 4,
+      "editionSize": 10,
       "image": "",
       "ebayUrl": "",
       "status": "coming-soon",
