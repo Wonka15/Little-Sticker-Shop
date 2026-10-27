@@ -10,12 +10,14 @@
   <link rel="stylesheet" href="style.css">
   <!-- defer means load the script without blocking the page. -->
   <script src="catalog.js" defer></script>
+  <script src="portfolio.js" defer></script>
 </head>
 <body>
   <header>
     <a class="logo" href="./">✦ Little Sticker Drops</a>
     <nav aria-label="Main navigation">
       <a href="#drops">Sticker drops</a>
+      <a href="#portfolio">Graphic design</a>
       <a href="policies.html">Shipping &amp; returns</a>
     </nav>
   </header>
@@ -42,6 +44,14 @@
       <p class="muted">Swipe to explore 10 designs. Tap an image to visit eBay when a listing is live.</p>
       <div id="products" class="products" aria-label="Swipeable sticker collection"></div>
       <p class="muted">Each design is a limited edition of 10. Actual availability is managed on eBay.</p>
+    </section>
+
+    <!-- Edit projects.json to add, hide, or change portfolio projects. -->
+    <section id="portfolio" class="section">
+      <p class="eyebrow">BEYOND THE STICKERS</p>
+      <h2>Graphic design projects</h2>
+      <p class="muted">Branding, illustration, typography, and creative experiments.</p>
+      <div id="portfolio-projects" class="portfolio-grid"></div>
     </section>
 
     <section class="section info">
