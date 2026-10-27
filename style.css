@@ -223,3 +223,10 @@ footer { padding: 28px; text-align: center; background: #24243c; color: white; f
 .portfolio-art img { width: 100%; height: 100%; object-fit: cover; }
 .portfolio-placeholder { font-weight: 900; letter-spacing: .12em; color: #6854a9; }
 .portfolio-link { display: inline-block; font-weight: 800; margin-top: 8px; }
+
+/* 13. Portfolio availability notice and GitHub link */
+.portfolio-intro { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:22px; padding:24px; margin:24px 0; background:#e8e5ff; border-radius:20px; }
+.portfolio-intro > div { flex:1 1 260px; }
+.portfolio-intro strong { font-size:1.2rem; }
+.portfolio-intro p { line-height:1.6; margin-bottom:0; }
+.portfolio-intro .button { flex-shrink:0; }
