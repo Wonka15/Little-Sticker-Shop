@@ -90,7 +90,19 @@ function renderProduct(product) {
   }
   details.append(element("p", "muted", "Check eBay for current availability and shipping details."));
 
-  card.append(art, details);
+  // The artwork itself becomes the eBay link ONLY when a real listing is live.
+  // Until then, it remains an ordinary image: no fake or broken checkout links.
+  if (status === "available" && url) {
+    const artLink = element("a", "artwork-link");
+    artLink.href = url;
+    artLink.target = "_blank";
+    artLink.rel = "noopener noreferrer";
+    artLink.setAttribute("aria-label", "View " + String(product.name || "sticker") + " on eBay");
+    artLink.append(art);
+    card.append(artLink, details);
+  } else {
+    card.append(art, details);
+  }
   productGrid.append(card);
 }
 
