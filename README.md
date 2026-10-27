@@ -1,3 +1,7 @@
+## 🎨 Start here: Color-coded editing handbook
+
+**New to editing the site?** Open [HANDBOOK.md](HANDBOOK.md) for the color-coded map of every file, sticker image export sizes, editing instructions, portfolio projects, and eBay links.
+
 # Little Sticker Drops — Beginner's Guide 🎨
 
 Welcome! Your storefront is a static HTML/CSS/JavaScript site with a **single product catalog file**. No database or checkout server is required.
