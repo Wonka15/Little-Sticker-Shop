@@ -164,3 +164,35 @@ footer { padding: 28px; text-align: center; background: #24243c; color: white; f
 .products { display: grid; gap: 28px; }
 .product-image img { display: block; width: 100%; height: 100%; max-height: 430px; object-fit: contain; }
 .product-image .sticker { max-width: 100%; overflow-wrap: anywhere; }
+
+/*
+  11. SWIPEABLE SHOWCASE
+  =====================
+  CSS scroll-snap makes a smooth horizontal gallery without a library.
+  On touchscreens: swipe left or right.
+  On a desktop: trackpad-scroll sideways, or use Shift + mouse wheel.
+*/
+.products {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 8px;
+  gap: 22px;
+  padding: 12px 8px 26px;
+  -webkit-overflow-scrolling: touch;
+}
+.products .product {
+  flex: 0 0 min(84vw, 360px);
+  display: flex;
+  flex-direction: column;
+  scroll-snap-align: start;
+  box-shadow: 5px 5px 0 #d8d1fa;
+}
+.products .art { min-height: 270px; height: 270px; padding: 22px; }
+.products .details { padding: 22px; }
+.products h3 { font-size: 1.5rem; }
+.products .price { font-size: 1.5rem; }
+.artwork-link { display: block; text-decoration: none; }
+.artwork-link:hover .art { filter: brightness(1.04); }
+.artwork-link:focus-visible { outline: 3px solid #e45b8d; outline-offset: -3px; }
+.products .sticker { font-size: .9rem; }
