@@ -66,3 +66,17 @@ Never upload API keys, account passwords, addresses, order details, or private d
 ## Rights
 
 Artwork and branding are reserved by the shop owner; no reuse license is granted.
+
+## Swipeable 10-design showcase
+
+The homepage is now a **horizontal swipe gallery**. It reads the ten example slots in `products.json`. Every design has an edition size of **10**, and all are **coming soon** until you upload artwork and publish real eBay listings.
+
+- Add a photo: upload `images/your-design.webp` and set `image` to that path.
+- Make an image clickable: add a real `https://www.ebay.com/itm/...` URL and set `status` to `available`.
+- Hide a design: set `visible` to `false`.
+- Mark sold out: set `status` to `sold-out`.
+- Never store customer orders or shipping addresses here: eBay handles those.
+
+The nine additional names are **placeholder concepts**, not finished sticker artwork or real inventory.
+
+**Hosting caution:** GitHub Pages has restrictions on using it to host e-commerce sites, even when checkout happens elsewhere. A gallery with eBay links is not a guaranteed exception.
