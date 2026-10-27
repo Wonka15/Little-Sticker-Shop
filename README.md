@@ -2,7 +2,7 @@
 
 **New to editing the site?** Open [HANDBOOK.md](HANDBOOK.md) for the color-coded map of every file, sticker image export sizes, editing instructions, portfolio projects, and eBay links.
 
-# Little Sticker Drops — Beginner's Guide 🎨
+# Curbside Stickers — Beginner's Guide 🎨
 
 Welcome! Your storefront is a static HTML/CSS/JavaScript site with a **single product catalog file**. No database or checkout server is required.
 
@@ -95,6 +95,6 @@ The ten designs currently display **colorful sample illustrations**, not finishe
 
 For a beginner-friendly map of files, see [HANDBOOK.md](HANDBOOK.md). You can also use `projects.json` to add or hide graphic design work.
 
-## Future rebrand
+## Brand and editing
 
-The shop name is intentionally unchanged until a final name is selected. To rebrand, update the visible name in `index.html` and `policies.html`, the page titles, and the copy in the README and handbook. Rename the GitHub repository only if you also plan to update the GitHub Pages address and any external links.
+The public website uses **Curbside Stickers / Cartoon Club** branding. The GitHub repository name and Pages URL intentionally remain unchanged. The homepage and policy page share the brand name, and the editable color palette lives at the end of `style.css` under `CURBSIDE CARTOON CLUB — BRAND THEME`. Sticker names, images, and eBay URLs remain editable in `products.json` without touching code. The artwork in the catalog is demo art, not print-ready inventory.
