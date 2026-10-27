@@ -196,3 +196,30 @@ footer { padding: 28px; text-align: center; background: #24243c; color: white; f
 .artwork-link:hover .art { filter: brightness(1.04); }
 .artwork-link:focus-visible { outline: 3px solid #e45b8d; outline-offset: -3px; }
 .products .sticker { font-size: .9rem; }
+
+/* 12. GRAPHIC DESIGN PORTFOLIO — independent of the sticker shop */
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: 24px;
+}
+.portfolio-card {
+  padding: 18px;
+  border: 2px solid #24243c;
+  border-radius: 22px;
+  background: white;
+  box-shadow: 6px 6px 0 #d8d1fa;
+}
+.portfolio-card h3 { font-size: 1.35rem; margin: 12px 0; }
+.portfolio-card p { line-height: 1.6; }
+.portfolio-art {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 4 / 3;
+  border-radius: 14px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #e8e5ff, #f4b8cb 55%, #ffe7b0);
+}
+.portfolio-art img { width: 100%; height: 100%; object-fit: cover; }
+.portfolio-placeholder { font-weight: 900; letter-spacing: .12em; color: #6854a9; }
+.portfolio-link { display: inline-block; font-weight: 800; margin-top: 8px; }
