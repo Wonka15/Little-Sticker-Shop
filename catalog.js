@@ -10,6 +10,7 @@
  */
 
 const productGrid = document.querySelector("#products");
+if (!productGrid) console.warn("Sticker gallery container missing.");
 
 /* COLORFUL SAMPLE ART: replaced automatically by any uploaded image. */
 const demoStickers = {
@@ -76,21 +77,27 @@ function renderProduct(product) {
   const card = element("article", "product");
   const art = element("div", "art product-image");
   const imagePath = typeof product.image === "string" ? product.image.trim() : "";
+  const demo = () => makeDemoSticker(String(product.id || ""));
 
   if (imagePath && /^images\/[a-zA-Z0-9_./-]+\.(webp|png|jpg|jpeg)$/i.test(imagePath) && !imagePath.includes("..")) {
     const img = element("img");
     img.src = imagePath;
     img.alt = "Sticker artwork: " + String(product.name || "Untitled");
     img.loading = "lazy";
+    img.decoding = "async";
+    // If the filename is wrong or the upload is missing, show demo art instead.
+    img.addEventListener("error", () => { img.remove(); art.append(demo()); }, { once: true });
     art.append(img);
   } else {
     // Demo art appears only when no real image path is supplied.
-    art.append(makeDemoSticker(String(product.id || "")));
+    art.append(demo());
   }
 
   const details = element("div", "details");
   const status = String(product.status || "coming-soon");
-  const label = status === "sold-out" ? "SOLD OUT" : status === "available" ? "LIMITED EDITION" : "COMING SOON";
+  const url = safeEbayUrl(product.ebayUrl);
+  const canBuy = status === "available" && Boolean(url);
+  const label = status === "sold-out" ? "SOLD OUT" : canBuy ? "LIMITED EDITION" : "COMING SOON";
   details.append(element("span", "pill", label));
   details.append(element("h3", "", String(product.name || "Untitled sticker")));
   details.append(element("p", "", String(product.description || "")));
@@ -105,8 +112,7 @@ function renderProduct(product) {
   }
 
   // Stock numbers live on eBay. We deliberately do not invent live counts.
-  const url = safeEbayUrl(product.ebayUrl);
-  if (status === "available" && url) {
+  if (canBuy) {
     const buy = element("a", "button", "Buy on eBay");
     buy.href = url;
     buy.rel = "noopener noreferrer";
@@ -119,7 +125,7 @@ function renderProduct(product) {
 
   // The artwork itself becomes the eBay link ONLY when a real listing is live.
   // Until then, it remains an ordinary image: no fake or broken checkout links.
-  if (status === "available" && url) {
+  if (canBuy) {
     const artLink = element("a", "artwork-link");
     artLink.href = url;
     artLink.target = "_blank";
@@ -141,6 +147,7 @@ async function loadCatalog() {
     const data = await response.json();
     if (!Array.isArray(data.products)) throw new Error("Invalid catalog format.");
 
+    productGrid.replaceChildren();
     const visible = data.products.filter(p => p && p.visible !== false);
     if (!visible.length) {
       productGrid.append(element("p", "muted", "New sticker drops are on the way!"));
@@ -153,4 +160,4 @@ async function loadCatalog() {
   }
 }
 
-loadCatalog();
+if (productGrid) loadCatalog();
