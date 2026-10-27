@@ -55,7 +55,7 @@ Put your real listing URL in `ebayUrl` and set status to `available`. The site o
   "name": "Retro Computer Club",
   "description": "A cheerful tribute to classic computers.",
   "price": 4,
-  "editionSize": 25,
+  "editionSize": 10,
   "image": "",
   "ebayUrl": "",
   "status": "coming-soon",
@@ -81,6 +81,20 @@ The homepage is now a **horizontal swipe gallery**. It reads the ten example slo
 - Mark sold out: set `status` to `sold-out`.
 - Never store customer orders or shipping addresses here: eBay handles those.
 
-The nine additional names are **placeholder concepts**, not finished sticker artwork or real inventory.
+The ten designs currently display **colorful sample illustrations**, not finished print-ready artwork or real inventory. Upload your own image to replace each sample.
 
 **Hosting caution:** GitHub Pages has restrictions on using it to host e-commerce sites, even when checkout happens elsewhere. A gallery with eBay links is not a guaranteed exception.
+
+## Before your first eBay sale — quick checklist
+
+1. Upload your finished image into `images/` (WebP, PNG, JPG or JPEG; a 1200 × 1200 px square is a good starting point).
+2. Change that design's `image` in `products.json` to the **exact filename**, e.g. `images/kickflip.webp`. A missing image now falls back to the sample illustration.
+3. Create the real listing on eBay and configure quantity, shipping, price and returns there.
+4. Paste the real HTTPS eBay listing into `ebayUrl` and set `status` to `available`. Both are required before the site enables its purchase button.
+5. Confirm the image, link, price, policy and mobile layout on the published website. **The site does not sync inventory or process payments.**
+
+For a beginner-friendly map of files, see [HANDBOOK.md](HANDBOOK.md). You can also use `projects.json` to add or hide graphic design work.
+
+## Future rebrand
+
+The shop name is intentionally unchanged until a final name is selected. To rebrand, update the visible name in `index.html` and `policies.html`, the page titles, and the copy in the README and handbook. Rename the GitHub repository only if you also plan to update the GitHub Pages address and any external links.
