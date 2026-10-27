@@ -1,5 +1,5 @@
 /*
-  LITTLE STICKER DROPS — DESIGN SYSTEM
+  CURBSIDE STICKERS — DESIGN SYSTEM
   ====================================
   CSS controls HOW the HTML looks.
 
@@ -236,9 +236,72 @@ footer { padding: 28px; text-align: center; background: #24243c; color: white; f
 .demo-emoji { font-size:4.5rem; line-height:1.25; filter:drop-shadow(2px 5px 0 #24243c16); }
 .demo-wordmark { font-size:clamp(1.05rem,2vw,1.35rem); font-weight:1000; letter-spacing:.045em; line-height:1.15; }
 .demo-caption { font-size:.55rem; font-weight:900; letter-spacing:.14em; margin-top:6px; }
-\n/* 15. ACCESSIBILITY AND MOBILE POLISH */
+
+/* 15. ACCESSIBILITY AND MOBILE POLISH */
 .products { overscroll-behavior-inline: contain; }
 .products .product { min-width: 0; }
 .products .details { overflow-wrap: anywhere; }
 @media (max-width: 700px) { nav { flex-wrap: wrap; } .section { padding: 56px 20px; } h2 { font-size: clamp(1.8rem, 7vw, 2.4rem); } }
 @media (prefers-reduced-motion: reduce) { .products { scroll-behavior: auto; } }
+
+/*
+  16. CURBSIDE CARTOON CLUB — BRAND THEME
+  =======================================
+  Change the colors below to customize the whole site.
+  This section intentionally overrides earlier starter styles.
+*/
+:root {
+  --ink: #1a1a1a; --paper: #f4ebd0; --red: #ff4b4b;
+  --yellow: #ffde59; --blue: #4ec7e3; --pink: #ff8ec8;
+  --mint: #b6f3c0;
+  color: var(--ink); background: var(--paper);
+  font-family: "Trebuchet MS", ui-rounded, system-ui, sans-serif;
+}
+body { background: var(--paper); }
+header { background: var(--paper); border-bottom: 4px solid var(--ink); padding-block: 14px; }
+.logo { display: inline-flex; flex-direction: column; align-items: flex-start; transform: rotate(-3deg); line-height: .94; letter-spacing: -.05em; font-weight: 1000; }
+.logo-main { color: var(--ink); font-size: clamp(1.3rem, 3vw, 1.9rem); text-shadow: 2px 2px 0 var(--yellow); }
+.logo-sub { background: var(--red); border: 2px solid var(--ink); border-radius: 40px; padding: 3px 10px; color: white; font-size: .82rem; letter-spacing: .06em; transform: rotate(2deg); }
+nav a { font-weight: 900; }
+nav a:hover { text-decoration: underline; text-decoration-thickness: 3px; text-decoration-color: var(--red); }
+.hero { position: relative; isolation: isolate; display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(210px, .7fr); gap: 30px; align-items: center; text-align: left; padding: 80px max(24px, calc((100vw - 1050px)/2)); background: var(--yellow); overflow: hidden; border-bottom: 5px solid var(--ink); }
+.hero::before { content: ""; position: absolute; inset: 0; z-index: -1; opacity: .12; background-image: radial-gradient(var(--ink) 1.1px, transparent 1.1px); background-size: 12px 12px; }
+.hero h1 { font-family: Impact, "Arial Black", sans-serif; font-weight: 900; font-size: clamp(3.4rem, 7.4vw, 7rem); letter-spacing: -.035em; line-height: .94; margin: 25px 0 12px; }
+.hero h1 em { color: var(--red); -webkit-text-stroke: 2px var(--ink); text-shadow: 5px 5px 0 var(--ink); }
+.hero .eyebrow { display: inline-block; padding: 8px 12px; background: var(--ink); color: white; letter-spacing: .08em; transform: rotate(-2deg); }
+.hero .hero-kicker { font-size: clamp(1.1rem, 2.5vw, 1.55rem); font-weight: 1000; margin: 20px 0 12px; }
+.hero p { margin: 0 0 24px; max-width: 520px; font-size: 1rem; }
+.hero-art { position: relative; min-height: 350px; }
+.hero-sticker { position: absolute; display: grid; place-items: center; border: 9px solid white; outline: 3px solid var(--ink); box-shadow: 9px 11px 0 #1a1a1a33; font-family: "Arial Black", sans-serif; font-weight: 900; }
+.hero-smile { width: 190px; height: 190px; border-radius: 50%; background: var(--pink); color: var(--ink); font-size: 10rem; top: 5%; left: 4%; transform: rotate(-14deg); }
+.hero-bolt { width: 125px; height: 150px; border-radius: 35% 40% 30% 35%; background: var(--blue); font-size: 5rem; top: 42%; right: 1%; transform: rotate(18deg); }
+.hero-skate { width: 100px; height: 100px; border-radius: 36%; background: var(--mint); font-size: 5rem; bottom: 2%; left: 3%; transform: rotate(12deg); }
+.hero-scribble { position: absolute; right: 0; top: 0; transform: rotate(13deg); font-size: 1.3rem; font-weight: 1000; line-height: .95; }
+.button { border: 3px solid var(--ink); background: var(--pink); color: var(--ink); box-shadow: 5px 5px 0 var(--ink); border-radius: 100px; transition: transform .15s ease, box-shadow .15s ease; }
+.button:hover { transform: translate(-2px,-2px); box-shadow: 7px 7px 0 var(--ink); }
+.button:focus-visible, a:focus-visible { outline: 3px dashed var(--red); outline-offset: 5px; }
+.section h2 { font-family: Impact, "Arial Black", sans-serif; font-size: clamp(2.3rem, 5vw, 4rem); line-height: 1; letter-spacing: -.015em; }
+.highlight { background: var(--yellow); box-shadow: 5px 0 0 var(--yellow), -5px 0 0 var(--yellow); }
+.eyebrow { color: #a92a31; }
+.product, .portfolio-card { border: 3px solid var(--ink); border-radius: 18px; box-shadow: 7px 7px 0 var(--ink); }
+.products .product { box-shadow: 7px 7px 0 var(--ink); }
+.products .art { background: var(--mint); }
+.pill { background: var(--yellow); border: 2px solid var(--ink); letter-spacing: .06em; }
+.demo-stage { border: 2px dashed #1a1a1a55; }
+.demo-diecut { border: 7px solid white; outline: 2px solid var(--ink); box-shadow: 6px 8px 0 #1a1a1a44; }
+.demo-wordmark { font-family: Impact, "Arial Black", sans-serif; font-size: 1.45rem; }
+.demo-caption { letter-spacing: .06em; }
+.muted { color: #48433b; }
+.disabled { background: #e3dfd5; color: #4c4944; border-color: #777; cursor: default; }
+.info { background: var(--blue); border: 3px solid var(--ink); box-shadow: 7px 7px 0 var(--ink); }
+.portfolio-art { background: linear-gradient(130deg, var(--pink), var(--yellow), var(--mint)); }
+footer { background: var(--ink); color: var(--paper); border-top: 5px solid var(--red); }
+@media (max-width: 760px) {
+  .hero { grid-template-columns: 1fr; padding: 64px 24px 44px; }
+  .hero-art { min-height: 230px; max-width: 350px; width: 100%; margin: 0 auto; }
+  .hero-smile { width: 145px; height: 145px; font-size: 7.5rem; }
+  .hero-bolt { width: 95px; height: 120px; font-size: 3.5rem; }
+  .hero-skate { width: 75px; height: 75px; font-size: 3.5rem; }
+  nav { gap: 12px; }
+}
+@media (prefers-reduced-motion: reduce) { .button { transition: none; } }
