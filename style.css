@@ -305,3 +305,41 @@ footer { background: var(--ink); color: var(--paper); border-top: 5px solid var(
   nav { gap: 12px; }
 }
 @media (prefers-reduced-motion: reduce) { .button { transition: none; } }
+
+/* 17. HERO ICON FIX — make the artwork readable on phones and tablets.
+   Emoji render at different visual sizes on Apple/Android. Use a CSS-drawn
+   lightning bolt and smile instead of relying on platform emoji glyphs. */
+.hero-art { width: 100%; min-width: 0; }
+.hero-sticker { line-height: 1; }
+.hero-smile { font-size: 0; }
+.hero-smile::before {
+  content: ""; width: 64%; height: 64%; border: 8px solid var(--ink);
+  border-radius: 50%; background:
+    radial-gradient(circle at 32% 38%, var(--ink) 0 7%, transparent 8%),
+    radial-gradient(circle at 68% 38%, var(--ink) 0 7%, transparent 8%),
+    var(--pink);
+}
+.hero-smile::after {
+  content: ""; position: absolute; width: 35%; height: 17%;
+  border-bottom: 9px solid var(--ink); border-radius: 0 0 60% 60%;
+  top: 50%;
+}
+.hero-bolt { font-size: 0; }
+.hero-bolt::before {
+  content: ""; width: 75%; height: 83%; background: var(--ink);
+  clip-path: polygon(58% 0, 8% 53%, 44% 53%, 29% 100%, 95% 39%, 57% 39%, 76% 0);
+}
+.hero-skate { font-size: clamp(4rem, 8vw, 6.5rem); }
+@media (max-width: 760px) {
+  .hero-art { min-height: 320px; max-width: 390px; }
+  .hero-smile { width: 190px; height: 190px; top: 4%; left: 4%; }
+  .hero-bolt { width: 135px; height: 155px; top: 43%; right: 2%; }
+  .hero-skate { width: 95px; height: 95px; bottom: 0; left: 7%; font-size: 5rem; }
+  .hero-scribble { right: 4%; top: 4%; }
+}
+@media (max-width: 370px) {
+  .hero-art { min-height: 280px; }
+  .hero-smile { width: 155px; height: 155px; }
+  .hero-bolt { width: 112px; height: 130px; }
+  .hero-skate { width: 80px; height: 80px; font-size: 4rem; }
+}
