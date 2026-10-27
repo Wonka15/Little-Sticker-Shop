@@ -17,7 +17,9 @@ async function loadPortfolio() {
     const response = await fetch("./projects.json", { cache: "no-cache" });
     if (!response.ok) throw new Error("Projects unavailable");
     const data = await response.json();
-    for (const project of data.projects || []) {
+    if (!Array.isArray(data.projects)) throw new Error("Invalid portfolio data");
+    portfolio.replaceChildren();
+    for (const project of data.projects) {
       if (!project || project.visible === false) continue;
       const card = make("article", "portfolio-card");
       const art = make("div", "portfolio-art");
@@ -27,6 +29,8 @@ async function loadPortfolio() {
         image.src = path;
         image.alt = "Artwork for " + String(project.title || "design project");
         image.loading = "lazy";
+        image.decoding = "async";
+        image.addEventListener("error", () => { art.replaceChildren(make("span", "portfolio-placeholder", "Image unavailable")); }, { once: true });
         art.append(image);
       } else {
         art.append(make("span", "portfolio-placeholder", "✳ YOUR ART HERE"));
