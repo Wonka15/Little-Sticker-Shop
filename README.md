@@ -1,66 +1,67 @@
-# ✦ Little Sticker Drops
+# Little Sticker Drops — Beginner's Guide 🎨
 
-A beginner-friendly, static sticker shop built with **HTML + CSS**, hosted on GitHub Pages. No backend, build tools, packages, or customer database required.
+Welcome! Your storefront is a static HTML/CSS/JavaScript site with a **single product catalog file**. No database or checkout server is required.
 
-## 🗺️ Your project map
+> **Important hosting note:** GitHub Pages is free for public projects, but GitHub's policy disallows using Pages as free hosting for an e-commerce site. Keep this repository as your code home and use a commerce-permitting host before selling. https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits
 
-| File | What it does | When to edit it |
-| --- | --- | --- |
-| `index.html` | Main storefront and sample product | Change sticker names, prices, and text |
-| `style.css` | Colors, layout, responsive design | Change the look of your shop |
-| `policies.html` | Shipping and returns policy | Finalize policies before accepting orders |
-| `.nojekyll` | Tells GitHub Pages to serve files directly | Normally never |
-| `README.md` | This friendly guide | Document changes for future you |
+## Your project map
 
-## 🧠 Mini coding lesson
+| File | What it does |
+| --- | --- |
+| `products.json` | ⭐ **Edit this to add, hide, or change stickers** |
+| `catalog.js` | Reads products.json and creates the cards automatically |
+| `index.html` | The home page structure |
+| `style.css` | Colors, layout, mobile design |
+| `policies.html` | Draft shipping and returns information |
+| `images/` | Put optimized sticker pictures here (create this folder when needed) |
 
-- **HTML** = the *structure* of a page (like a house's walls).
-- **CSS** = the *decoration* (paint, spacing, layout).
-- **Comments** = notes for humans; browsers ignore them.
-- `class="product"` in HTML matches `.product` in CSS.
+## Add a sticker using an iPad
 
-Every file contains comments to explain important sections. Search for **START HERE**, **EXAMPLE PRICE**, or **EBAY CHECKOUT** to jump to common changes.
+1. Open [products.json](https://github.com/Wonka15/Little-Sticker-Shop/blob/main/products.json).
+2. Tap the pencil icon to edit (Safari's Request Desktop Website may help).
+3. Copy the existing product object (everything between its `{` and `}`).
+4. Add a comma after the previous object and paste the copy below it.
+5. Change `id` (must be unique), `name`, `description`, `price`, and `editionSize`.
+6. Change `image` to something like `images/my-sticker.webp` once you've uploaded it.
+7. Commit your change. Your site will refresh after deployment.
 
-## 🎨 Change your first sticker (on an iPad!)
+**JSON rules:** names and text use double quotes, prices and edition sizes are numbers, and `true`/`false` have no quotes. There is **no comma after the last product**.
 
-1. Open [index.html](https://github.com/Wonka15/Little-Sticker-Shop/blob/main/index.html) on GitHub.
-2. Tap the pencil icon to edit. Safari's **Request Desktop Website** option can help.
-3. Search for `Retro Computer Club` and change the product name.
-4. Search for `$4.00` to change the example price.
-5. Search for `Edition size:` to change the total planned quantity.
-6. Tap **Commit changes**. GitHub Pages will republish after the change.
+## Hide or retire a sticker
 
-**Important:** The `25 of 25` display is an illustration, **not live stock**. Manage actual quantities on eBay.
+- `"visible": false` hides the card without deleting the history.
+- `"status": "sold-out"` shows the sticker as sold out.
+- `"status": "coming-soon"` disables purchasing.
+- `"status": "available"` enables purchasing **only when a valid HTTPS eBay URL exists**.
+- To delete a product permanently, remove its entire object from the array, including the appropriate separating comma.
 
-## 🛒 Connect a real eBay listing
+## Add a sticker image
 
-When your listing is published, open `index.html` and search for **EBAY CHECKOUT**. The HTML comment directly above the disabled button shows how to replace it with a real link.
+Create an `images` folder in the repository by uploading a file at `images/your-sticker.webp`. Then enter that exact path in the product's `image` field. Use WebP if possible; aim for around 200–500 KB per image. Keep print-quality masters separately.
 
-Never put eBay passwords, API secrets, addresses, or customer records into GitHub. Payments and orders remain on eBay.
+## Connect eBay
 
-## 🌍 Website hosting
+Put your real listing URL in `ebayUrl` and set status to `available`. The site only allows HTTPS eBay URLs and never handles payments. **Inventory is NOT synchronized.** Configure the actual quantity and shipping settings on eBay.
 
-Your expected URL is:
-https://wonka15.github.io/Little-Sticker-Shop/
+## Example product
 
-If you get a 404, check **Settings → Pages**:
-- Source: **Deploy from a branch**
-- Branch: **main**
-- Folder: **/(root)**
+```json
+{
+  "id": "retro-computer-club",
+  "name": "Retro Computer Club",
+  "description": "A cheerful tribute to classic computers.",
+  "price": 4,
+  "editionSize": 25,
+  "image": "",
+  "ebayUrl": "",
+  "status": "coming-soon",
+  "visible": true
+}
+```
 
-Then check **Actions** for a successful Pages deployment.
+## Security and maintenance
 
-## 🛡️ Security and store readiness
-
-- Static pages mean no custom payment server, database, or login form to protect.
-- Use GitHub two-factor authentication and review account permissions.
-- Do not publish real stock claims without a reliable inventory source.
-- Confirm shipping fees, packaging, and return wording on eBay before selling.
-- The policies page is still a **draft** and does not override buyer protections.
-
-## 💛 Design notes
-
-The smiling retro computer is made with CSS. It is a placeholder illustration, not a print-ready sticker design. All project paths are relative so GitHub Pages works in a repository subdirectory.
+Never upload API keys, account passwords, addresses, order details, or private data. Use two-factor authentication on GitHub and eBay. Keep the return policy consistent with your eBay listing and applicable law.
 
 ## Rights
 
