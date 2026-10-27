@@ -1,0 +1,16 @@
+{
+  "_help": "BEGINNER GUIDE: Each object inside products is one sticker. Duplicate an object to add a sticker. Change visible to false to hide it. Never put private customer data in this public file.",
+  "products": [
+    {
+      "id": "retro-computer-club",
+      "name": "Retro Computer Club",
+      "description": "A cheerful tribute to classic computers and the people who love them.",
+      "price": 4,
+      "editionSize": 25,
+      "image": "",
+      "ebayUrl": "",
+      "status": "coming-soon",
+      "visible": true
+    }
+  ]
+}
