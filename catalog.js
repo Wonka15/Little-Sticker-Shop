@@ -1,5 +1,5 @@
 /*
- * LITTLE STICKER DROPS — CATALOG READER
+ * CURBSIDE STICKERS — CATALOG READER
  * =====================================
  * You do NOT need to edit this file to add or remove stickers.
  * Edit products.json instead. This script turns each product into a card.
@@ -14,16 +14,16 @@ if (!productGrid) console.warn("Sticker gallery container missing.");
 
 /* COLORFUL SAMPLE ART: replaced automatically by any uploaded image. */
 const demoStickers = {
- "retro-computer-club":["🖥️","RETRO CLUB","#d8f3e8","#4a8b83"],
- "floppy-disk-friends":["💾","SAVE ME!","#dce8ff","#567ac5"],
- "pixel-heart":["💗","PIXEL LOVE","#ffe0e8","#dd6391"],
- "happy-macintosh":["🖥️","HELLO!","#fff0ce","#bd8954"],
- "space-explorer":["🚀","SPACE CLUB","#e4d9ff","#8066c6"],
- "rainbow-cassette":["📼","MIXTAPE","#ffe3d2","#e18c65"],
- "tiny-robot":["🤖","BEEP BOOP","#d6f6f3","#4a9f9a"],
- "arcade-dreams":["🕹️","HIGH SCORE","#f9d9f7","#ad62ad"],
- "cosmic-cat":["🐈","STAR CAT","#dfe5ff","#6b79bd"],
- "mystery-sticker":["🎁","SURPRISE!","#fff0c9","#c99a3f"]
+ "retro-computer-club":["🖥️","RETRO CLUB","#b6f3c0","#1a1a1a"],
+ "floppy-disk-friends":["💾","SAVE ME!","#4ec7e3","#1a1a1a"],
+ "pixel-heart":["💗","PIXEL LOVE","#ff8ec8","#1a1a1a"],
+ "happy-macintosh":["🖥️","HELLO!","#ffde59","#1a1a1a"],
+ "space-explorer":["🚀","SPACE CLUB","#ff8ec8","#1a1a1a"],
+ "rainbow-cassette":["📼","MIXTAPE","#ffde59","#1a1a1a"],
+ "tiny-robot":["🤖","BEEP BOOP","#b6f3c0","#1a1a1a"],
+ "arcade-dreams":["🕹️","HIGH SCORE","#4ec7e3","#1a1a1a"],
+ "cosmic-cat":["🐈","STAR CAT","#ff8ec8","#1a1a1a"],
+ "mystery-sticker":["🎁","SURPRISE!","#ff4b4b","#1a1a1a"]
 };
 function makeDemoSticker(id) {
   const data = demoStickers[id] || ["✨","NEW DROP","#e8e5ff","#6854a9"];
@@ -34,7 +34,7 @@ function makeDemoSticker(id) {
   sticker.append(element("span","demo-sparkle","✦ ★ ✦"));
   sticker.append(element("span","demo-emoji",data[0]));
   sticker.append(element("span","demo-wordmark",data[1]));
-  sticker.append(element("span","demo-caption","LITTLE STICKER DROPS"));
+  sticker.append(element("span","demo-caption","CURBSIDE STICKERS"));
   stage.append(sticker);
   return stage;
 }
