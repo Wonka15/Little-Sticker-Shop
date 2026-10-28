@@ -1,4 +1,4 @@
-# 🎨 Curbside Stickers — Color-Coded Editing Handbook
+# 🎨 Otter Stickers — Color-Coded Editing Handbook
 
 Welcome! This guide is your **map of the website code**. You can edit everything from an iPad using GitHub's pencil (Edit) button. No programming experience required.
 
@@ -178,9 +178,9 @@ That's it. Have fun making things! ✨
 
 ---
 
-## 🛹 10 — YOUR CURBSIDE CONTROL ROOM
+## 🛹 10 — YOUR OTTER CONTROL ROOM
 
-Open **[Curbside Control Room](image-jar.html)** from your iPad. Bookmark it: it is intentionally **not linked from the customer storefront**.
+Open **[Otter Control Room](image-jar.html)** from your iPad. Bookmark it: it is intentionally **not linked from the customer storefront**.
 
 This is a **public, read-only maintainer helper**, not a private login or an upload system. Anyone with the URL can view it. Never put passwords, API keys, or customer data there.
 
