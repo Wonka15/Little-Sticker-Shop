@@ -1,6 +1,12 @@
 <!doctype html>
+<!-- 🩵 CYAN / MAINTAINER CONTROL ROOM
+     Beginner map: HTML = panels, CSS = appearance, JavaScript = measurements.
+     This page is PUBLIC if someone knows the URL; never add secrets.
+     To edit sticker data, use products.json. This dashboard only reads it.
+-->
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex"><title>Control Room | Curbside Stickers</title><link rel="stylesheet" href="style.css">
+<!-- 🩵 STYLE SECTION: dashboard-specific colors, spacing, and meters. -->
 <style>
 .jar-wrap{max-width:900px;margin:0 auto;padding:36px 20px 80px}.jar-panel{background:#fffdf3;border:3px solid #1a1a1a;border-radius:18px;box-shadow:7px 7px 0 #1a1a1a;padding:24px;margin:24px 0}
 .jar-meter{height:26px;border:3px solid #1a1a1a;border-radius:30px;overflow:hidden;background:#ece7d7}.jar-fill{height:100%;width:0;background:#b6f3c0;transition:width .2s}
@@ -26,10 +32,14 @@
 <p><a href="https://github.com/Wonka15/Little-Sticker-Shop/edit/main/projects.json">Edit portfolio ↗</a></p>
 <p><a href="https://github.com/Wonka15/Little-Sticker-Shop/actions">Check GitHub Pages deployment ↗</a></p>
 <p><a href="https://github.com/Wonka15/Little-Sticker-Shop/blob/main/HANDBOOK.md">Beginner editing handbook ↗</a></p></section></main><footer>© Curbside Stickers · Image Jar</footer><script>
+// 🩵 JAVASCRIPT: browser-only size checker. It does not upload files.
+// 512000 bytes ~ 500 KB per image; 5242880 bytes = 5 MiB total.
+// These are suggested performance budgets, not GitHub storage limits.
 const limit=512000,budget=5242880;
 const el=id=>document.getElementById(id);
 const size=n=>(n/1024).toFixed(0)+" KB";
 function row(list,name,bytes){const li=document.createElement("li");li.textContent=name+" — "+size(bytes)+(bytes>limit?" ⚠ Large":" ✓");list.append(li);}
+// 🩵 STEP 1: Read products.json and measure linked images.
 async function check(){
  try{
   const res=await fetch("products.json");if(!res.ok)throw Error("Catalog unavailable");
@@ -46,6 +56,7 @@ async function check(){
   el("published-note").textContent=paths.length?"Only images referenced in products.json are counted.":"No uploaded images referenced yet.";
  }catch(e){el("published-total").textContent="Unable to check catalog";}
 }
+// 🩵 STEP 2: Check selected local files without uploading them.
 el("image-files").addEventListener("change",e=>{const files=[...e.target.files];el("local-list").replaceChildren();el("local-total").textContent=files.length+" images · "+size(files.reduce((n,f)=>n+f.size,0));files.forEach(f=>row(el("local-list"),f.name,f.size));});
 check();
 </script></body></html>
