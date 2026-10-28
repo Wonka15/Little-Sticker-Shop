@@ -160,7 +160,7 @@ async function loadCatalog() {
       productGrid.append(element("p", "muted", "New sticker drops are on the way!"));
       return;
     }
-    visible.forEach(renderProduct);
+    visible.forEach(renderProduct);\n    setupStickerCarousel();
   } catch (error) {
     console.error("Catalog error:", error);
     productGrid.append(element("p", "muted", "Sticker listings are temporarily unavailable. Please check back soon."));
@@ -168,3 +168,68 @@ async function loadCatalog() {
 }
 
 if (productGrid) loadCatalog();
+
+// 🧡 STEP 6: COVER-FLOW FOCUS EFFECT
+// Swipe naturally on a phone/iPad, or use arrows and keyboard on desktop.
+// The nearest card to the gallery center gets the "is-focused" class.
+function setupStickerCarousel() {
+  const cards = [...productGrid.querySelectorAll(".product")];
+  const previous = document.querySelector("#sticker-prev");
+  const next = document.querySelector("#sticker-next");
+  const position = document.querySelector("#sticker-position");
+  if (!cards.length) return;
+
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  let currentIndex = 0;
+  let frameRequested = false;
+
+  function refreshFocus() {
+    frameRequested = false;
+    const center = productGrid.getBoundingClientRect().left + productGrid.clientWidth / 2;
+    let nearest = 0;
+    let distance = Infinity;
+    cards.forEach((card, index) => {
+      const bounds = card.getBoundingClientRect();
+      const gap = Math.abs(bounds.left + bounds.width / 2 - center);
+      if (gap < distance) { distance = gap; nearest = index; }
+    });
+    currentIndex = nearest;
+    cards.forEach((card, index) => card.classList.toggle("is-focused", index === currentIndex));
+    if (position) position.textContent = (currentIndex + 1) + " / " + cards.length;
+    if (previous) previous.disabled = currentIndex === 0;
+    if (next) next.disabled = currentIndex === cards.length - 1;
+  }
+
+  function scheduleFocus() {
+    if (!frameRequested) {
+      frameRequested = true;
+      requestAnimationFrame(refreshFocus);
+    }
+  }
+
+  function goTo(index) {
+    const target = cards[Math.max(0, Math.min(cards.length - 1, index))];
+    if (!target) return;
+    // Center the chosen card without changing the page's vertical position.
+    const left = target.offsetLeft - productGrid.offsetLeft -
+      (productGrid.clientWidth - target.offsetWidth) / 2;
+    productGrid.scrollTo({ left, behavior: reducedMotion.matches ? "instant" : "smooth" });
+    scheduleFocus();
+  }
+
+  previous?.addEventListener("click", () => goTo(currentIndex - 1));
+  next?.addEventListener("click", () => goTo(currentIndex + 1));
+  productGrid.addEventListener("keydown", (event) => {
+    if (event.target !== productGrid) return;
+    if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
+      event.preventDefault();
+      goTo(currentIndex + (event.key === "ArrowRight" ? 1 : -1));
+    }
+  });
+  productGrid.addEventListener("scroll", scheduleFocus, { passive: true });
+  window.addEventListener("resize", scheduleFocus);
+  requestAnimationFrame(() => {
+    goTo(0);
+    refreshFocus();
+  });
+}
