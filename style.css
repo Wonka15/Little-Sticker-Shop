@@ -522,3 +522,103 @@ footer { background: var(--ink); color: var(--paper); border-top: 5px solid var(
 .eyebrow { color: #146d79; }
 .hero .eyebrow { background: var(--ink); color: #effff8; }
 footer { border-top-color: #167f85; }
+
+/* 22. 🤖 FRIENDLY EMOJI ROBOT — drawn with CSS, no image downloads.
+   Inspired by the classic robot emoji: blue rounded head, square ears,
+   glowing eyes, small smiling grille, and a red-tipped antenna.
+   The rest of the hero illustration (including the skateboard) stays put.
+*/
+.cartoon-robot {
+  width: 200px;
+  height: 272px;
+  transform: rotate(-7deg);
+  filter: drop-shadow(7px 10px 0 #102c3a33);
+}
+.robot-antenna {
+  top: -20px;
+  left: 98px;
+  width: 9px;
+  height: 38px;
+  background: #527f92;
+  border: 2px solid var(--ink);
+  z-index: 1;
+}
+.robot-antenna::before {
+  width: 24px;
+  height: 24px;
+  top: -20px;
+  left: -10px;
+  background: #f06b79;
+  border: 3px solid var(--ink);
+  box-shadow: inset -3px -3px 0 #bd455c;
+}
+.robot-head {
+  top: 15px;
+  left: 5px;
+  width: 190px;
+  height: 163px;
+  background: linear-gradient(145deg, #a7e6fa 0%, #6fc4dc 55%, #3e92b5 100%);
+  border: 7px solid #eafaff;
+  outline: 4px solid var(--ink);
+  border-radius: 34px;
+  box-shadow: inset 0 -9px 0 #287d9d45;
+  z-index: 2;
+}
+.robot-head::before, .robot-head::after {
+  content: "";
+  position: absolute;
+  top: 56px;
+  width: 19px;
+  height: 48px;
+  background: #5ca5c1;
+  border: 4px solid var(--ink);
+  border-radius: 9px;
+  z-index: -1;
+}
+.robot-head::before { left: -24px; }
+.robot-head::after { right: -24px; }
+.robot-eye {
+  width: 39px;
+  height: 43px;
+  background: #f3ffff;
+  border: 5px solid var(--ink);
+  border-radius: 12px;
+  transform: translateY(-16px);
+  box-shadow: 0 0 10px #e0ffff90;
+}
+.robot-eye::after {
+  width: 12px;
+  height: 16px;
+  top: 10px;
+  left: 9px;
+  background: #1a566e;
+  border-radius: 5px;
+}
+.robot-mouth {
+  left: 51px;
+  bottom: 19px;
+  width: 76px;
+  height: 27px;
+  background: #e6fcff;
+  border: 4px solid var(--ink);
+  border-radius: 9px;
+  box-shadow: inset 0 -5px 0 #9dcddd;
+}
+.robot-mouth::after {
+  content: "";
+  position: absolute;
+  inset: 4px 8px;
+  background: repeating-linear-gradient(90deg, transparent 0 12px, #23556b 12px 15px);
+}
+.robot-body {
+  top: 188px;
+  left: 36px;
+  width: 128px;
+  height: 77px;
+  background: linear-gradient(145deg, #9ee4dc, #4aadb8);
+  border-radius: 22px;
+}
+.robot-heart { color: #e9fdfb; -webkit-text-stroke: 2px var(--ink); }
+@media (max-width: 370px) {
+  .cartoon-robot { transform: rotate(-7deg) scale(.83); }
+}
