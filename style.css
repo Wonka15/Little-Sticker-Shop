@@ -497,3 +497,28 @@ footer { background: var(--ink); color: var(--paper); border-top: 5px solid var(
 @media (prefers-reduced-motion: reduce) {
   .hero-copy > .button { transition: none; }
 }
+
+/* 21. 🌊 CURBSIDE COAST — cool green / teal / blue palette
+   Beginner tip: edit these six swatches to recolor the entire shop.
+   This section intentionally overrides the earlier warm palette.
+   Contrast: dark navy outlines keep buttons and text easy to read.
+*/
+:root {
+  --ink: #102c3a;       /* deep ocean navy: outlines and text */
+  --paper: #eff9f5;     /* pale sea-glass page */
+  --red: #167f85;       /* teal accent (legacy variable name) */
+  --yellow: #b8edcf;    /* mint green hero and highlights */
+  --blue: #6fc4dc;      /* sky blue panels */
+  --pink: #8cdbd5;      /* seafoam buttons and stickers */
+  --mint: #c8f2e3;      /* light mint artwork backgrounds */
+  --hero-glow: rgba(19, 143, 161, .28);
+}
+.hero { background: linear-gradient(135deg, #b8edcf 0%, #a4e8d7 52%, #b7e5f3 100%); }
+.hero h1 em { color: #137f8b; text-shadow: 3px 4px 0 var(--ink); }
+.hero-copy > .button { background: #7ddbd0; }
+.hero-copy > .button:hover { background: #a4ece1; }
+.hero-copy > .button:active { background: #63c9c2; }
+.logo-sub { background: #167f85; }
+.eyebrow { color: #146d79; }
+.hero .eyebrow { background: var(--ink); color: #effff8; }
+footer { border-top-color: #167f85; }
