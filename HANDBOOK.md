@@ -1,4 +1,4 @@
-# 🎨 Little Sticker Drops — Color-Coded Editing Handbook
+# 🎨 Curbside Stickers — Color-Coded Editing Handbook
 
 Welcome! This guide is your **map of the website code**. You can edit everything from an iPad using GitHub's pencil (Edit) button. No programming experience required.
 
@@ -174,3 +174,27 @@ This script reads `projects.json` and displays portfolio cards. You usually **do
 **Design → export WebP → upload to images/ → edit products.json → commit → preview → publish eBay listing → paste eBay URL → mark available.**
 
 That's it. Have fun making things! ✨
+
+
+---
+
+## 🛹 10 — YOUR CURBSIDE CONTROL ROOM
+
+Open **[Curbside Control Room](image-jar.html)** from your iPad. Bookmark it: it is intentionally **not linked from the customer storefront**.
+
+This is a **public, read-only maintainer helper**, not a private login or an upload system. Anyone with the URL can view it. Never put passwords, API keys, or customer data there.
+
+### 🫙 01 · Published sticker images
+The meter measures only images linked from `products.json`. The suggested goal is **500 KB per image**, with a **5 MB collection budget**. These are speed guidelines, **not** GitHub storage limits. Unlinked images and other website files are not included.
+
+### 📷 02 · Check images before upload
+Choose images from your iPad to see their file sizes. This does **not** upload them. When happy, use the GitHub images folder link and upload normally.
+
+### 📦 04 · Sticker inventory overview
+The panel counts designs, visible items, and statuses in `products.json`. It does **not** know how many copies eBay has sold.
+
+### 🔧 05 · Quick edit links
+Tap the GitHub links to edit your products, portfolio, and images or check deployment progress. GitHub may ask you to sign in.
+
+### 🧑‍🎨 Beginner rule
+**HTML** builds the page, **CSS** styles it, **JavaScript** reads your catalog and updates the dashboard, and **JSON** stores your sticker information. You can safely start by editing JSON only.
