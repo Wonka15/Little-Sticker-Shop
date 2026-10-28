@@ -861,3 +861,25 @@ footer { border-top-color: #167f85; }
   font-size: .68rem;
   letter-spacing: .01em;
 }
+
+/* 28. 🦦 FACE-FIRST GRIPTAPE
+   The full-body emoji was too tiny to recognize on a narrow skateboard.
+   Enlarge it, clip to the face area, and move it toward the visible nose. */
+.skate-scene .griptape-otter {
+  left: 39%;
+  top: 44%;
+  width: 61px;
+  height: 48px;
+  overflow: hidden;
+  display: block;
+  text-align: center;
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+  font-size: 4.2rem;
+  line-height: 1;
+  transform: translate(-50%, -50%) rotate(-7deg);
+  filter: drop-shadow(0 1px 1px #0008);
+}
+.skate-scene .griptape-wordmark {
+  right: 17px;
+  font-size: .75rem;
+}
