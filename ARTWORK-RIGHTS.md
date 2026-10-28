@@ -1,9 +1,9 @@
-# © Curbside Stickers — Artwork Rights & Safe Publishing
+# © Otter Stickers — Artwork Rights & Safe Publishing
 
 ## Beginner guide
 Original artwork remains the property of its respective copyright owner. Browsing or purchasing a physical sticker does not grant permission to copy, redistribute, modify, print, or resell the artwork, except where permission is explicitly given.
 
-**Suggested public notice:** “© Curbside Stickers. Original artwork and illustrations. All rights reserved. Please do not reproduce or resell designs without written permission.”
+**Suggested public notice:** “© Otter Stickers. Original artwork and illustrations. All rights reserved. Please do not reproduce or resell designs without written permission.”
 
 ## Before publishing
 1. Keep layered source files, print masters, client work, and customer information in **private** storage, not this public repository.
