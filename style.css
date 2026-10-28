@@ -811,3 +811,23 @@ footer { border-top-color: #167f85; }
   .skate-scene .robot-antenna::before,
   .skate-scene .robot-antenna::after { animation: none; }
 }
+
+/* 26. 🦦 HERO TYPE HIERARCHY — quiet first line, big confident second line. */
+.hero h1 .hero-small-line {
+  display: block;
+  font-size: .46em;
+  line-height: 1.2;
+  letter-spacing: .015em;
+  margin-bottom: .18em;
+}
+.hero h1 .hero-big-line {
+  display: block;
+  font-size: 1.08em;
+  line-height: .99;
+  letter-spacing: -.055em;
+  overflow-wrap: normal;
+}
+@media (max-width: 760px) {
+  .hero h1 .hero-small-line { font-size: .48em; }
+  .hero h1 .hero-big-line { font-size: clamp(2.3rem, 10vw, 4.8rem); letter-spacing: -.055em; }
+}
