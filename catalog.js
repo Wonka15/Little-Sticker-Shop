@@ -9,10 +9,13 @@
  * Only links to eBay HTTPS listing pages are allowed.
  */
 
+// 🧡 STEP 1: Find the empty gallery container in index.html.
 const productGrid = document.querySelector("#products");
 if (!productGrid) console.warn("Sticker gallery container missing.");
 
 /* COLORFUL SAMPLE ART: replaced automatically by any uploaded image. */
+// 🧡 STEP 2: These are SAMPLE illustrations shown until real images are uploaded.
+// Each entry contains [emoji, title, background color, text color].
 const demoStickers = {
  "retro-computer-club":["🖥️","RETRO CLUB","#b6f3c0","#1a1a1a"],
  "floppy-disk-friends":["💾","SAVE ME!","#4ec7e3","#1a1a1a"],
@@ -25,6 +28,7 @@ const demoStickers = {
  "cosmic-cat":["🐈","STAR CAT","#ff8ec8","#1a1a1a"],
  "mystery-sticker":["🎁","SURPRISE!","#ff4b4b","#1a1a1a"]
 };
+// 🧡 STEP 3: Assemble a fallback illustration using ordinary HTML elements.
 function makeDemoSticker(id) {
   const data = demoStickers[id] || ["✨","NEW DROP","#e8e5ff","#6854a9"];
   const stage = element("div", "demo-stage");
@@ -71,6 +75,7 @@ function element(tag, className, text) {
 }
 
 /** Builds ONE sticker card using the details in products.json. */
+// 🧡 STEP 4: Build one card. product is one entry from products.json.
 function renderProduct(product) {
   if (!product || product.visible === false) return;
 
@@ -140,6 +145,8 @@ function renderProduct(product) {
 }
 
 /** Load the public product list whenever someone opens the website. */
+// 🧡 STEP 5: Fetch JSON and draw all visible cards.
+// async/await means wait for the file to finish loading.
 async function loadCatalog() {
   try {
     const response = await fetch("./products.json", { cache: "no-cache" });
