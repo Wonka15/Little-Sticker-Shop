@@ -8,6 +8,12 @@ Welcome! Your storefront is a static HTML/CSS/JavaScript site with a **single pr
 
 > **Important hosting note:** GitHub Pages is free for public projects, but GitHub's policy disallows using Pages as free hosting for an e-commerce site. Keep this repository as your code home and use a commerce-permitting host before selling. https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits
 
+## 🚚 Moving Curbside Stickers to another web host
+
+**[Read the step-by-step hosting migration guide](HOSTING-MIGRATION.md).** It explains how to download a complete backup, upload the website to a host such as HoboHost, keep your `images/` folder and JSON files together, test your site, and switch a custom domain.
+
+The public storefront uses **relative file paths**, so it is not locked to GitHub Pages. No database or build process is needed. On a new host, edits made on GitHub **will not automatically publish** unless you configure deployment syncing. The Control Room's editing shortcuts still point to GitHub.
+
 ## Your project map
 
 | File | What it does |
