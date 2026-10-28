@@ -14,6 +14,14 @@ Welcome! Your storefront is a static HTML/CSS/JavaScript site with a **single pr
 
 The public storefront uses **relative file paths**, so it is not locked to GitHub Pages. No database or build process is needed. On a new host, edits made on GitHub **will not automatically publish** unless you configure deployment syncing. The Control Room's editing shortcuts still point to GitHub.
 
+## 🧰 Control Room: new maintenance tools
+
+Open [the Curbside Control Room](image-jar.html) for a visual thumbnail gallery, automated website health checks, a browser-saved sticker launch checklist, and a one-click link to GitHub's ZIP archive. The image size meter remains a performance suggestion, not a hosting quota.
+
+**Important:** The Control Room is a public page, not a secure admin area. The checklist is saved in the current browser only. Health checks cannot verify live eBay stock or all possible website issues.
+
+Read [ARTWORK-RIGHTS.md](ARTWORK-RIGHTS.md) for copyright notice wording, advice on protecting print-ready masters, and practical limits of public preview protection. Keep ZIP backups somewhere private; the GitHub ZIP includes committed source and images only.
+
 ## Your project map
 
 | File | What it does |
