@@ -55,7 +55,7 @@
     .control-stat strong { display: block; font-size: 1.7rem; }
     .control-stat span { font-size: .84rem; }
     .control-tip { border-left: 5px solid #e4b72f; padding: 10px 14px; background: #fff6d6; margin-top: 16px; line-height: 1.5; }
-    .control-room code { background: #eee9df; border-radius: 4px; padding: 2px 5px; overflow-wrap: anywhere; }
+.thumb-gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:12px}.thumb-card{padding:10px;border:2px solid #222;border-radius:12px;background:white;overflow-wrap:anywhere}.thumb-card img{width:100%;height:115px;object-fit:contain;background:#eee}.thumb-card small{display:block;margin-top:8px}.launch-step{display:flex;gap:10px;align-items:start;padding:9px 0}.launch-step input{width:20px;height:20px;flex:none}.control-room code { background: #eee9df; border-radius: 4px; padding: 2px 5px; overflow-wrap: anywhere; }
     @media (max-width: 720px) { .control-grid { grid-template-columns: 1fr; } .control-card.wide { grid-column: auto; } .control-card { padding: 18px; } }
   </style>
 </head>
@@ -77,7 +77,7 @@
       <a href="#image-budget">🫙 Image budget</a>
       <a href="#new-images">📷 Check PNGs</a>
       <a href="#inventory">📦 Inventory</a>
-      <a href="#quick-links">🛠️ Edit files</a>
+      <a href="#previews">🖼️ Gallery</a><a href="#health">🩺 Health</a><a href="#launch">🚀 Launch</a><a href="#backup">💾 Backup</a><a href="#quick-links">🛠️ Edit files</a>
     </nav>
 
     <div class="control-grid">
@@ -131,6 +131,11 @@
         <p class="control-muted">These are suggestions for loading performance, not GitHub storage limits. The meter excludes unreferenced files, portfolio artwork, and other site assets.</p>
       </section>
 
+<section class="control-card control-pink wide" id="previews"><span class="control-kicker">05 · Artwork gallery</span><h2>🖼️ Sticker thumbnails</h2><p>These are the images referenced in products.json.</p><div id="thumb-gallery" class="thumb-gallery">Loading previews…</div></section>
+<section class="control-card control-blue wide" id="health"><span class="control-kicker">06 · Website health</span><h2>🩺 Site health checker</h2><p id="health-summary" aria-live="polite">Checking site…</p><ul id="health-list" class="control-list"></ul><p class="control-muted">Checks files and URL formats, not live eBay stock. Coming-soon products do not require checkout links.</p></section>
+<section class="control-card control-yellow" id="launch"><span class="control-kicker">07 · Sticker drop</span><h2>🚀 Launch checklist</h2><p>Tick the steps for your next drop. Saved in this browser only.</p><div id="launch-steps"></div><p id="launch-count" aria-live="polite"></p><button id="launch-reset" type="button">Reset checklist</button></section>
+<section class="control-card control-green" id="rights"><span class="control-kicker">08 · Artwork protection</span><h2>©️ Protect your artwork</h2><p>Keep print-ready originals and layered source files private. Upload only compressed web previews. Copyright notices clarify rights but cannot prevent copying.</p><a class="control-link" href="ARTWORK-RIGHTS.md">Read the artwork rights guide ↗</a></section>
+<section class="control-card control-purple wide" id="backup"><span class="control-kicker">09 · Backup and transfer</span><h2>💾 Back up the entire website</h2><p>Download a ZIP of the committed website source, then save it somewhere safe. It includes committed images and data but not private print masters or uncommitted edits.</p><a class="control-link" href="https://github.com/Wonka15/Little-Sticker-Shop/archive/refs/heads/main.zip">Download website ZIP ↗</a><a class="control-link" href="HOSTING-MIGRATION.md">Read the hosting migration guide ↗</a><p class="control-muted">Before uploading to another host, remove repository-only files you don't want publicly accessible.</p></section>
       <!-- 💜 06: Edit source files using GitHub's signed-in editor -->
       <section class="control-card control-purple wide" id="quick-links">
         <span class="control-kicker">05 · Your shortcuts</span>
@@ -204,7 +209,7 @@
             !path.includes("..")
         ))];
 
-        let totalBytes = 0;
+        let totalBytes = 0; const missing = []; const gallery = byId("thumb-gallery"); gallery.replaceChildren();
         let unavailable = 0;
         for (const path of paths) {
           try {
@@ -213,14 +218,21 @@
             const bytes = (await imageResponse.blob()).size;
             totalBytes += bytes;
             addImageRow(byId("published-list"), path, bytes);
+            // 🩷 Build thumbnails safely without injecting HTML.
+            const card=document.createElement("div");card.className="thumb-card";
+            const img=document.createElement("img");img.src=path;img.alt="Sticker preview: "+path;img.loading="lazy";
+            const label=document.createElement("small");label.textContent=path+" · "+readableSize(bytes);
+            card.append(img,label);gallery.append(card);
           } catch {
-            unavailable++;
+            unavailable++; missing.push(path);
             const item = document.createElement("li");
             item.textContent = path + " · Unavailable";
             byId("published-list").append(item);
           }
         }
 
+        if (!paths.length) gallery.textContent="No images linked yet. Add artwork paths to products.json.";
+        await runHealth(products,missing);
         const percent = Math.round((totalBytes / TOTAL_IMAGE_BUDGET) * 100);
         byId("published-total").textContent = readableSize(totalBytes) + " / 5 MiB";
         byId("published-fill").style.width = Math.min(percent, 100) + "%";
@@ -234,7 +246,7 @@
         byId("inventory-status").textContent = "Couldn't read the catalog. Check products.json.";
         byId("published-total").textContent = "Image check unavailable";
         byId("published-note").textContent = "Open this page on your hosted website, not as a local file.";
-        console.error("Control Room:", error);
+        byId("health-summary").textContent="⚠ Catalog unavailable";console.error("Control Room:", error);
       }
     }
 
@@ -250,6 +262,27 @@
       files.forEach((file) => addImageRow(list, file.name, file.size));
     });
 
+    // 🩵 Website health checks: never treat coming-soon placeholders as broken listings.
+    async function runHealth(products,missing) {
+      const list=byId("health-list");list.replaceChildren();let warnings=0;
+      function report(ok,title,detail){if(!ok)warnings++;const li=document.createElement("li");li.textContent=(ok?"✓ ":"⚠ ")+title+" — "+detail;li.style.color=ok?"#18613c":"#a03424";list.append(li);}
+      report(true,"Catalog","products.json loaded");
+      const ids=products.map(p=>p.id);
+      report(ids.length===new Set(ids).size,"Product IDs","Check for duplicate IDs");
+      report(products.every(p=>p.id&&p.name&&Number.isFinite(p.price)&&p.price>=0&&Number.isInteger(p.editionSize)&&p.editionSize>0),"Product details","Check names, prices and edition sizes");
+      const available=products.filter(p=>p.visible!==false&&p.status==="available");
+      report(available.every(p=>{try{const u=new URL(p.ebayUrl);return u.protocol==="https:"&&(u.hostname==="ebay.com"||u.hostname.endsWith(".ebay.com"));}catch{return false;}}),"eBay links","Only available stickers require valid eBay URLs");
+      report(missing.length===0,"Artwork files",missing.length?missing.join(", "):"All referenced images load");
+      try{const r=await fetch("./projects.json");const d=await r.json();report(r.ok&&Array.isArray(d.projects),"Portfolio","projects.json loaded and parsed");}catch{report(false,"Portfolio","Could not read projects.json");}
+      byId("health-summary").textContent=warnings?warnings+" item(s) need attention":"✓ All automated checks passed";
+    }
+    // 🚀 Checklist progress stays on this device; it never edits the shop.
+    const steps=["Export a web-sized preview; keep print master private","Upload image to images/","Update image path and description in products.json","Check price and edition size","Create and verify the eBay listing","Mark the sticker available","Test the live shop on mobile and desktop"];
+    const key="curbside-launch-v1";let done=[];
+    try{const saved=JSON.parse(localStorage.getItem(key)||"[]");if(Array.isArray(saved))done=saved;}catch{}
+    function drawSteps(){const area=byId("launch-steps");area.replaceChildren();steps.forEach((step,i)=>{const label=document.createElement("label");label.className="launch-step";const box=document.createElement("input");box.type="checkbox";box.checked=done.includes(i);box.addEventListener("change",()=>{done=box.checked?[...new Set([...done,i])]:done.filter(x=>x!==i);try{localStorage.setItem(key,JSON.stringify(done));}catch{}drawSteps();});const span=document.createElement("span");span.textContent=step;label.append(box,span);area.append(label);});byId("launch-count").textContent=done.length+" of "+steps.length+" completed";}
+    byId("launch-reset").addEventListener("click",()=>{done=[];try{localStorage.removeItem(key);}catch{}drawSteps();});
+    drawSteps();
     loadDashboard();
   </script>
 </body>
