@@ -1,5 +1,5 @@
 /*
-  CURBSIDE STICKERS — DESIGN SYSTEM
+  OTTER STICKERS — DESIGN SYSTEM
   ====================================
   CSS controls HOW the HTML looks.
 
@@ -253,7 +253,7 @@ footer { padding: 28px; text-align: center; background: #24243c; color: white; f
 @media (prefers-reduced-motion: reduce) { .products { scroll-behavior: auto; } }
 
 /*
-  16. CURBSIDE CARTOON CLUB — BRAND THEME
+  16. OTTER CARTOON CLUB — BRAND THEME
   =======================================
   Change the colors below to customize the whole site.
   This section intentionally overrides earlier starter styles.
@@ -498,7 +498,7 @@ footer { background: var(--ink); color: var(--paper); border-top: 5px solid var(
   .hero-copy > .button { transition: none; }
 }
 
-/* 21. 🌊 CURBSIDE COAST — cool green / teal / blue palette
+/* 21. 🌊 OTTER COAST — cool green / teal / blue palette
    Beginner tip: edit these six swatches to recolor the entire shop.
    This section intentionally overrides the earlier warm palette.
    Contrast: dark navy outlines keep buttons and text easy to read.
