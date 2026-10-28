@@ -2,13 +2,13 @@
 
 **New to editing the site?** Open [HANDBOOK.md](HANDBOOK.md) for the color-coded map of every file, sticker image export sizes, editing instructions, portfolio projects, and eBay links.
 
-# Curbside Stickers — Beginner's Guide 🎨
+# Otter Stickers — Beginner's Guide 🎨
 
 Welcome! Your storefront is a static HTML/CSS/JavaScript site with a **single product catalog file**. No database or checkout server is required.
 
 > **Important hosting note:** GitHub Pages is free for public projects, but GitHub's policy disallows using Pages as free hosting for an e-commerce site. Keep this repository as your code home and use a commerce-permitting host before selling. https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits
 
-## 🚚 Moving Curbside Stickers to another web host
+## 🚚 Moving Otter Stickers to another web host
 
 **[Read the step-by-step hosting migration guide](HOSTING-MIGRATION.md).** It explains how to download a complete backup, upload the website to a host such as HoboHost, keep your `images/` folder and JSON files together, test your site, and switch a custom domain.
 
@@ -16,7 +16,7 @@ The public storefront uses **relative file paths**, so it is not locked to GitHu
 
 ## 🧰 Control Room: new maintenance tools
 
-Open [the Curbside Control Room](image-jar.html) for a visual thumbnail gallery, automated website health checks, a browser-saved sticker launch checklist, and a one-click link to GitHub's ZIP archive. The image size meter remains a performance suggestion, not a hosting quota.
+Open [the Otter Control Room](image-jar.html) for a visual thumbnail gallery, automated website health checks, a browser-saved sticker launch checklist, and a one-click link to GitHub's ZIP archive. The image size meter remains a performance suggestion, not a hosting quota.
 
 **Important:** The Control Room is a public page, not a secure admin area. The checklist is saved in the current browser only. Health checks cannot verify live eBay stock or all possible website issues.
 
@@ -74,7 +74,7 @@ The filenames above are **examples**, not promises that those images have alread
 
 ### 4. Check your picture size before uploading
 
-Open the [Curbside Control Room / Image Jar](https://wonka15.github.io/Little-Sticker-Shop/image-jar.html) to inspect files selected on your iPad. This **does not upload them**. Its **500 KB per image** and **5 MB total** numbers are *suggested website-performance budgets*, not GitHub storage quotas. It measures only images referenced by the product catalog, not every file in the repository.
+Open the [Otter Control Room / Image Jar](https://wonka15.github.io/Little-Sticker-Shop/image-jar.html) to inspect files selected on your iPad. This **does not upload them**. Its **500 KB per image** and **5 MB total** numbers are *suggested website-performance budgets*, not GitHub storage quotas. It measures only images referenced by the product catalog, not every file in the repository.
 
 ### Troubleshooting
 
@@ -163,4 +163,4 @@ For a beginner-friendly map of files, see [HANDBOOK.md](HANDBOOK.md). You can al
 
 ## Brand and editing
 
-The public website uses **Curbside Stickers / Cartoon Club** branding. The GitHub repository name and Pages URL intentionally remain unchanged. The homepage and policy page share the brand name, and the editable color palette lives at the end of `style.css` under `CURBSIDE CARTOON CLUB — BRAND THEME`. Sticker names, images, and eBay URLs remain editable in `products.json` without touching code. The artwork in the catalog is demo art, not print-ready inventory.
+The public website uses **Otter Stickers / Cartoon Club** branding. The GitHub repository name and Pages URL intentionally remain unchanged. The homepage and policy page share the brand name, and the editable color palette lives at the end of `style.css` under `OTTER CARTOON CLUB — BRAND THEME`. Sticker names, images, and eBay URLs remain editable in `products.json` without touching code. The artwork in the catalog is demo art, not print-ready inventory.
