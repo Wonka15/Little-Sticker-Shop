@@ -17,7 +17,59 @@ Welcome! Your storefront is a static HTML/CSS/JavaScript site with a **single pr
 | `index.html` | The home page structure |
 | `style.css` | Colors, layout, mobile design |
 | `policies.html` | Draft shipping and returns information |
-| `images/` | Put optimized sticker pictures here (create this folder when needed) |
+| `images/` | 📁 Existing folder for sticker and portfolio pictures |
+
+## 🖼️ How to upload sticker images (iPad-friendly)
+
+**Your picture library is the [images/ folder](https://github.com/Wonka15/Little-Sticker-Shop/tree/main/images).** You do not need a separate HTML file for each image. Upload the image once, then reference its path in `products.json`.
+
+### 1. Upload the picture to GitHub
+
+1. Export your sticker as a `.png`, `.jpg`, or `.webp` image. For web previews, aim for around **1200 × 1200 pixels** and **500 KB or less** when practical.
+2. Open the [images/ folder on GitHub](https://github.com/Wonka15/Little-Sticker-Shop/tree/main/images).
+3. Sign in and choose **Add file → Upload files** (the mobile interface may look slightly different).
+4. Select your picture from the iPad Files or Photos picker. Example filename: `robot-sticker.png`.
+5. Review the filename and **Commit changes**. GitHub now stores the image at `images/robot-sticker.png`.
+
+**Beginner tip:** Use lowercase filenames with hyphens, no spaces, e.g. `retro-computer.png`. Filenames and capital letters must match exactly.
+
+### 2. Tell your sticker card which image to use
+
+1. Open [products.json](https://github.com/Wonka15/Little-Sticker-Shop/blob/main/products.json) and tap **Edit** (pencil icon).
+2. Find the sticker you want to update, for example the one whose `id` is `tiny-robot`.
+3. Change its `image` field from an empty string to the exact image path:
+
+```json
+"image": "images/robot-sticker.png"
+```
+
+4. **Commit changes**. After GitHub Pages deploys, the website's `catalog.js` reads `products.json` and displays the picture automatically.
+
+### 3. Understand how the files connect
+
+```text
+images/
+  README.md             ← notes about this folder
+  robot-sticker.png     ← your uploaded artwork (example)
+products.json           ← "image": "images/robot-sticker.png"
+catalog.js              ← reads the image path and builds the card
+index.html              ← displays the sticker gallery
+```
+
+The filenames above are **examples**, not promises that those images have already been uploaded.
+
+### 4. Check your picture size before uploading
+
+Open the [Curbside Control Room / Image Jar](https://wonka15.github.io/Little-Sticker-Shop/image-jar.html) to inspect files selected on your iPad. This **does not upload them**. Its **500 KB per image** and **5 MB total** numbers are *suggested website-performance budgets*, not GitHub storage quotas. It measures only images referenced by the product catalog, not every file in the repository.
+
+### Troubleshooting
+
+- **Picture missing?** Confirm the file really exists in `images/` and the path matches its name and capitalization.
+- **Still seeing demo art?** Make sure you changed the correct product's `image` field and committed the JSON edit.
+- **Changes not showing?** Wait for GitHub Pages deployment, then refresh the website. Check the repository's **Actions** tab for errors.
+- **Large PNG?** Consider exporting a smaller WebP preview; keep the original high-resolution artwork backed up privately.
+
+---
 
 ## Add a sticker using an iPad
 
