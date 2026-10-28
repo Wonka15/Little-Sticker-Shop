@@ -1,62 +1,256 @@
 <!doctype html>
-<!-- 🩵 CYAN / MAINTAINER CONTROL ROOM
-     Beginner map: HTML = panels, CSS = appearance, JavaScript = measurements.
-     This page is PUBLIC if someone knows the URL; never add secrets.
-     To edit sticker data, use products.json. This dashboard only reads it.
+<!--
+  🩵 CURBSIDE CONTROL ROOM — beginner-friendly maintenance dashboard
+  ================================================================
+  HTML: the sections below are the dashboard's visible panels.
+  CSS: the <style> section makes this page easy to read on iPad.
+  JS: the <script> section reads products.json and checks image sizes.
+  NOTE: This page is public if someone knows its URL. Never add secrets.
 -->
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="noindex"><title>Control Room | Curbside Stickers</title><link rel="stylesheet" href="style.css">
-<!-- 🩵 STYLE SECTION: dashboard-specific colors, spacing, and meters. -->
-<style>
-.jar-wrap{max-width:900px;margin:0 auto;padding:36px 20px 80px}.jar-panel{background:#fffdf3;border:3px solid #1a1a1a;border-radius:18px;box-shadow:7px 7px 0 #1a1a1a;padding:24px;margin:24px 0}
-.jar-meter{height:26px;border:3px solid #1a1a1a;border-radius:30px;overflow:hidden;background:#ece7d7}.jar-fill{height:100%;width:0;background:#b6f3c0;transition:width .2s}
-.jar-stat{font-size:1.25rem;font-weight:900}.jar-list{padding:0;list-style:none}.jar-list li{padding:12px 0;border-bottom:1px solid #bbb;overflow-wrap:anywhere}.jar-good{color:#18613c}.jar-warn{color:#a03424}.jar-note{font-size:.9rem;line-height:1.6}input[type=file]{max-width:100%}
-</style></head><body>
-<header><a class="logo" href="./"><span class="logo-main">CURBSIDE</span><span class="logo-sub">STICKERS ✳</span></a><nav><a href="./">← Back to shop</a></nav></header>
-<main class="jar-wrap"><p class="eyebrow">MAINTAINER DASHBOARD · PUBLIC LINK, NOT IN SHOP NAVIGATION</p><h1 style="font-size:clamp(2.5rem,7vw,4.5rem)">🛹 CURBSIDE CONTROL ROOM</h1>
-<p>Your beginner-friendly maintenance space: check image sizes, review sticker status, and find the files you edit. This page is not password-protected.</p>
-<section class="jar-panel"><h2>Published sticker images</h2><p class="jar-note">Suggested total budget for 10 sticker images: <strong>5 MB</strong>. This is a loading-performance goal, not your GitHub storage quota.</p>
-<div class="jar-meter" role="progressbar" aria-label="Published image budget used" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="published-meter"><div class="jar-fill" id="published-fill"></div></div>
-<p class="jar-stat" id="published-total" aria-live="polite">Checking catalog…</p><ul class="jar-list" id="published-list"></ul><p class="jar-note" id="published-note"></p></section>
-<section class="jar-panel"><h2>Check new images before uploading</h2><p>Choose sticker images from your iPad. Files stay on your device—this checker does <strong>not</strong> upload them.</p>
-<label for="image-files"><strong>Select images:</strong></label> <input id="image-files" type="file" accept="image/png,image/jpeg,image/webp" multiple>
-<p class="jar-stat" id="local-total" aria-live="polite">No images selected</p><ul class="jar-list" id="local-list"></ul></section>
-<section class="jar-panel"><h2>How much is too much?</h2><p><strong class="jar-good">Green:</strong> 500 KB or less per sticker. <strong class="jar-warn">Orange:</strong> over 500 KB; consider compressing. Images over 1 MB deserve extra attention.</p>
-<p>Recommended: 1200 × 1200 px WebP for most sticker previews. Keep your full-quality print masters elsewhere.</p>
-<p class="jar-note">The published meter counts only unique image paths referenced by products.json that can be measured. It does not include unreferenced files, portfolio images, CSS, JavaScript, or GitHub account storage. Image sizes alone cannot predict exact loading speed.</p>
-<p><a class="button" href="https://github.com/Wonka15/Little-Sticker-Shop/tree/main/images" target="_blank" rel="noopener noreferrer">Open images folder on GitHub ↗</a></p>
-</section><section class="jar-panel"><h2>04 · Sticker inventory overview</h2><p id="inventory-status" aria-live="polite">Reading catalog…</p><p class="jar-note">Counts reflect products.json, not live eBay inventory.</p></section>
-<section class="jar-panel"><h2>05 · Quick edit links</h2>
-<p><a href="https://github.com/Wonka15/Little-Sticker-Shop/edit/main/products.json">Edit sticker names, images, and prices ↗</a></p>
-<p><a href="https://github.com/Wonka15/Little-Sticker-Shop/tree/main/images">Upload sticker artwork ↗</a></p>
-<p><a href="https://github.com/Wonka15/Little-Sticker-Shop/edit/main/projects.json">Edit portfolio ↗</a></p>
-<p><a href="https://github.com/Wonka15/Little-Sticker-Shop/actions">Check GitHub Pages deployment ↗</a></p>
-<p><a href="https://github.com/Wonka15/Little-Sticker-Shop/blob/main/HANDBOOK.md">Beginner editing handbook ↗</a></p></section></main><footer>© Curbside Stickers · Image Jar</footer><script>
-// 🩵 JAVASCRIPT: browser-only size checker. It does not upload files.
-// 512000 bytes ~ 500 KB per image; 5242880 bytes = 5 MiB total.
-// These are suggested performance budgets, not GitHub storage limits.
-const limit=512000,budget=5242880;
-const el=id=>document.getElementById(id);
-const size=n=>(n/1024).toFixed(0)+" KB";
-function row(list,name,bytes){const li=document.createElement("li");li.textContent=name+" — "+size(bytes)+(bytes>limit?" ⚠ Large":" ✓");list.append(li);}
-// 🩵 STEP 1: Read products.json and measure linked images.
-async function check(){
- try{
-  const res=await fetch("products.json");if(!res.ok)throw Error("Catalog unavailable");
-  const data=await res.json();let total=0;
-  // Count your sticker entries. These numbers are not synced with eBay.
-  const products=Array.isArray(data.products)?data.products:[];
-  const visible=products.filter(p=>p.visible!==false);
-  const count=status=>visible.filter(p=>p.status===status).length;
-  el("inventory-status").textContent=products.length+" designs · "+visible.length+" visible · "+count("available")+" available · "+count("coming-soon")+" coming soon · "+count("sold-out")+" sold out.";
-  const paths=[...new Set(data.products.map(p=>p.image).filter(p=>typeof p==="string"&&p.startsWith("images/")&&!p.includes("..")))];
-  for(const path of paths){try{const r=await fetch(path);if(!r.ok)throw Error("Not found");const bytes=(await r.blob()).size;total+=bytes;row(el("published-list"),path,bytes);}catch(e){const li=document.createElement("li");li.textContent=path+" — unavailable";el("published-list").append(li);}}
-  const pct=Math.round(total/budget*100);el("published-total").textContent=size(total)+" / 5120 KB ("+pct+"% of suggested budget)";
-  el("published-fill").style.width=Math.min(pct,100)+"%";el("published-meter").setAttribute("aria-valuenow",Math.min(pct,100));
-  el("published-note").textContent=paths.length?"Only images referenced in products.json are counted.":"No uploaded images referenced yet.";
- }catch(e){el("published-total").textContent="Unable to check catalog";}
-}
-// 🩵 STEP 2: Check selected local files without uploading them.
-el("image-files").addEventListener("change",e=>{const files=[...e.target.files];el("local-list").replaceChildren();el("local-total").textContent=files.length+" images · "+size(files.reduce((n,f)=>n+f.size,0));files.forEach(f=>row(el("local-list"),f.name,f.size));});
-check();
-</script></body></html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Control Room | Curbside Stickers</title>
+  <link rel="stylesheet" href="style.css">
+
+  <!-- 🩵 Dashboard-only styling. The public shop still uses style.css. -->
+  <style>
+    .control-room { max-width: 1060px; margin: 0 auto; padding: 28px 18px 88px; }
+    .control-room * { box-sizing: border-box; }
+    .control-intro { max-width: 760px; line-height: 1.6; }
+    .control-title { font-size: clamp(2rem, 6vw, 3.7rem); line-height: 1.06; margin: 12px 0; }
+    .control-subtitle { font-size: 1.05rem; max-width: 700px; }
+    .control-nav { display: flex; gap: 9px; flex-wrap: wrap; margin: 24px 0; }
+    .control-nav a { color: #171717; background: #fff; border: 2px solid #171717; border-radius: 999px; padding: 9px 14px; text-decoration: none; font-weight: 800; }
+    .control-nav a:focus-visible, .control-link:focus-visible, .file-label:focus-within { outline: 3px solid #2855d7; outline-offset: 3px; }
+    .control-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; align-items: start; }
+    .control-card { background: #fffdf5; border: 3px solid #171717; border-radius: 18px; padding: 22px; box-shadow: 5px 5px 0 #171717; min-width: 0; }
+    .control-card.wide { grid-column: 1 / -1; }
+    .control-card h2 { font-size: clamp(1.25rem, 3vw, 1.6rem); margin: 0 0 10px; line-height: 1.25; }
+    .control-card p { line-height: 1.6; }
+    .control-kicker { display: inline-block; font-weight: 900; font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 12px; }
+    .control-pink { border-top: 10px solid #ff8ec8; }
+    .control-blue { border-top: 10px solid #4ec7e3; }
+    .control-yellow { border-top: 10px solid #ffde59; }
+    .control-green { border-top: 10px solid #b6f3c0; }
+    .control-purple { border-top: 10px solid #c8b5ff; }
+    .control-muted { font-size: .88rem; color: #444; }
+    .control-number { font-size: clamp(1.7rem, 4vw, 2.5rem); font-weight: 900; margin: 6px 0; overflow-wrap: anywhere; }
+    .control-meter { height: 24px; background: #e7e4db; border: 2px solid #171717; border-radius: 999px; overflow: hidden; }
+    .control-fill { height: 100%; width: 0; background: #63c88c; transition: width .25s; }
+    .control-fill.over { background: #e66d58; }
+    .control-list { list-style: none; margin: 12px 0 0; padding: 0; }
+    .control-list li { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 12px 0; border-bottom: 1px solid #c9c5bb; overflow-wrap: anywhere; }
+    .control-list li:last-child { border-bottom: 0; }
+    .control-status { font-weight: 800; }
+    .control-status.warn { color: #9a351f; }
+    .control-status.good { color: #18613c; }
+    .control-file { display: block; max-width: 100%; margin: 14px 0; font: inherit; }
+    .control-link { display: block; border: 2px solid #171717; border-radius: 12px; padding: 13px 15px; margin-top: 10px; color: #171717; background: #fff; font-weight: 800; text-decoration: none; overflow-wrap: anywhere; }
+    .control-link:hover { background: #fff2c3; }
+    .control-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 16px; }
+    .control-stat { background: #f5f1e6; border-radius: 12px; padding: 12px; }
+    .control-stat strong { display: block; font-size: 1.7rem; }
+    .control-stat span { font-size: .84rem; }
+    .control-tip { border-left: 5px solid #e4b72f; padding: 10px 14px; background: #fff6d6; margin-top: 16px; line-height: 1.5; }
+    .control-room code { background: #eee9df; border-radius: 4px; padding: 2px 5px; overflow-wrap: anywhere; }
+    @media (max-width: 720px) { .control-grid { grid-template-columns: 1fr; } .control-card.wide { grid-column: auto; } .control-card { padding: 18px; } }
+  </style>
+</head>
+<body>
+  <header>
+    <a class="logo" href="./"><span class="logo-main">CURBSIDE</span><span class="logo-sub">STICKERS ✳</span></a>
+    <nav aria-label="Control room navigation"><a href="./">← Back to shop</a></nav>
+  </header>
+
+  <main class="control-room">
+    <!-- 🩵 01: Intro and quick navigation -->
+    <div class="control-intro">
+      <p class="eyebrow">🛹 YOUR WEBSITE WORKBENCH</p>
+      <h1 class="control-title">CURBSIDE CONTROL ROOM</h1>
+      <p class="control-subtitle">A simple place to check your sticker pictures, see your catalog at a glance, and jump straight to the files you edit.</p>
+      <p class="control-muted">Maintainer helper · Not linked in the shop menu · Not password-protected</p>
+    </div>
+    <nav class="control-nav" aria-label="Jump to dashboard section">
+      <a href="#image-budget">🫙 Image budget</a>
+      <a href="#new-images">📷 Check PNGs</a>
+      <a href="#inventory">📦 Inventory</a>
+      <a href="#quick-links">🛠️ Edit files</a>
+    </nav>
+
+    <div class="control-grid">
+      <!-- 🩷 02: How much space published sticker previews use -->
+      <section class="control-card control-pink" id="image-budget">
+        <span class="control-kicker">01 · Published artwork</span>
+        <h2>🫙 Your image jar</h2>
+        <p class="control-muted">Sticker images currently referenced by <code>products.json</code>.</p>
+        <p class="control-number" id="published-total" aria-live="polite">Checking images…</p>
+        <div class="control-meter" role="progressbar" aria-label="Suggested image budget used" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="published-meter">
+          <div class="control-fill" id="published-fill"></div>
+        </div>
+        <p class="control-muted" id="published-note">Suggested total: 5 MiB for the sticker collection.</p>
+        <ul class="control-list" id="published-list"></ul>
+      </section>
+
+      <!-- 🩵 03: Local image checker; does NOT upload anything -->
+      <section class="control-card control-blue" id="new-images">
+        <span class="control-kicker">02 · Before you upload</span>
+        <h2>📷 Check a new sticker PNG</h2>
+        <p>Choose images from your iPad or computer to see their sizes first.</p>
+        <label for="image-files"><strong>Choose picture files</strong></label>
+        <input class="control-file" id="image-files" type="file" accept="image/png,image/jpeg,image/webp" multiple>
+        <p class="control-number" id="local-total" aria-live="polite">No files selected</p>
+        <ul class="control-list" id="local-list"></ul>
+        <div class="control-tip"><strong>Privacy:</strong> This checker reads file sizes locally. It does not upload your artwork.</div>
+      </section>
+
+      <!-- 💛 04: Product status overview, based on JSON, not eBay -->
+      <section class="control-card control-yellow" id="inventory">
+        <span class="control-kicker">03 · Sticker catalog</span>
+        <h2>📦 Your sticker collection</h2>
+        <p class="control-muted">Numbers come from <code>products.json</code>, not live eBay stock.</p>
+        <p id="inventory-status" class="control-muted" aria-live="polite">Loading catalog…</p>
+        <div class="control-stats">
+          <div class="control-stat"><strong id="stat-total">—</strong><span>Total designs</span></div>
+          <div class="control-stat"><strong id="stat-visible">—</strong><span>Visible in shop</span></div>
+          <div class="control-stat"><strong id="stat-available">—</strong><span>Marked available</span></div>
+          <div class="control-stat"><strong id="stat-coming">—</strong><span>Coming soon</span></div>
+        </div>
+      </section>
+
+      <!-- 💚 05: Plain-language explanation of the performance targets -->
+      <section class="control-card control-green" id="guidelines">
+        <span class="control-kicker">04 · Easy size guide</span>
+        <h2>💚 Is my picture too big?</h2>
+        <p><strong>✓ 500 KB or less:</strong> Good target for one sticker preview.</p>
+        <p><strong>⚠ Over 500 KB:</strong> Consider resizing or exporting as WebP.</p>
+        <p><strong>⚠ Over 1 MB:</strong> Worth optimizing before publishing.</p>
+        <div class="control-tip">Try around <strong>1200 × 1200 px</strong> for previews. Keep high-resolution print masters backed up elsewhere.</div>
+        <p class="control-muted">These are suggestions for loading performance, not GitHub storage limits. The meter excludes unreferenced files, portfolio artwork, and other site assets.</p>
+      </section>
+
+      <!-- 💜 06: Edit source files using GitHub's signed-in editor -->
+      <section class="control-card control-purple wide" id="quick-links">
+        <span class="control-kicker">05 · Your shortcuts</span>
+        <h2>🛠️ Edit your website</h2>
+        <p>These links open GitHub. Sign in there to upload artwork or change your sticker information.</p>
+        <div class="control-grid">
+          <div>
+            <a class="control-link" href="https://github.com/Wonka15/Little-Sticker-Shop/tree/main/images" target="_blank" rel="noopener noreferrer">📁 Upload or view sticker images ↗</a>
+            <a class="control-link" href="https://github.com/Wonka15/Little-Sticker-Shop/edit/main/products.json" target="_blank" rel="noopener noreferrer">🩷 Edit stickers and prices ↗</a>
+            <a class="control-link" href="https://github.com/Wonka15/Little-Sticker-Shop/edit/main/projects.json" target="_blank" rel="noopener noreferrer">💜 Edit portfolio projects ↗</a>
+          </div>
+          <div>
+            <a class="control-link" href="https://github.com/Wonka15/Little-Sticker-Shop/actions" target="_blank" rel="noopener noreferrer">🚀 Check website updates ↗</a>
+            <a class="control-link" href="https://github.com/Wonka15/Little-Sticker-Shop/blob/main/README.md" target="_blank" rel="noopener noreferrer">📖 Beginner README ↗</a>
+            <a class="control-link" href="https://github.com/Wonka15/Little-Sticker-Shop/blob/main/HOSTING-MIGRATION.md" target="_blank" rel="noopener noreferrer">🚚 Hosting transfer guide ↗</a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+  <footer>© Curbside Stickers · Maintainer Control Room</footer>
+
+  <script>
+    // 🩵 BEGINNER SETTINGS: change these only if you want new size targets.
+    const PER_IMAGE_TARGET = 500 * 1024;       // 500 KiB per picture
+    const TOTAL_IMAGE_BUDGET = 5 * 1024 * 1024; // 5 MiB for the collection
+
+    // Helper: find a page element by its ID.
+    const byId = (id) => document.getElementById(id);
+
+    // Helper: make bytes easy to read.
+    function readableSize(bytes) {
+      return bytes >= 1024 * 1024
+        ? (bytes / (1024 * 1024)).toFixed(2) + " MiB"
+        : Math.round(bytes / 1024) + " KB";
+    }
+
+    // Show a filename, its size, and a friendly status.
+    function addImageRow(list, name, bytes) {
+      const item = document.createElement("li");
+      const filename = document.createElement("span");
+      filename.textContent = name;
+      const status = document.createElement("span");
+      status.className = "control-status " + (bytes > PER_IMAGE_TARGET ? "warn" : "good");
+      status.textContent = readableSize(bytes) + (bytes > PER_IMAGE_TARGET ? " · Check size" : " · Good");
+      item.append(filename, status);
+      list.append(item);
+    }
+
+    // 🩵 STEP 1: Read the sticker catalog, then count the sticker statuses.
+    async function loadDashboard() {
+      try {
+        const response = await fetch("./products.json", { cache: "no-cache" });
+        if (!response.ok) throw new Error("Couldn't load products.json");
+        const data = await response.json();
+        if (!Array.isArray(data.products)) throw new Error("Invalid product list");
+
+        const products = data.products.filter(Boolean);
+        const visible = products.filter((product) => product.visible !== false);
+        const count = (status) => visible.filter((product) => product.status === status).length;
+        byId("stat-total").textContent = products.length;
+        byId("stat-visible").textContent = visible.length;
+        byId("stat-available").textContent = count("available");
+        byId("stat-coming").textContent = count("coming-soon");
+        byId("inventory-status").textContent = "Catalog loaded successfully.";
+
+        // 🩵 STEP 2: Collect unique image paths. Only allow files in images/.
+        const paths = [...new Set(products.map((product) => product.image).filter(
+          (path) => typeof path === "string" &&
+            /^images\/[a-zA-Z0-9_./-]+\.(png|jpe?g|webp)$/i.test(path) &&
+            !path.includes("..")
+        ))];
+
+        let totalBytes = 0;
+        let unavailable = 0;
+        for (const path of paths) {
+          try {
+            const imageResponse = await fetch(path);
+            if (!imageResponse.ok) throw new Error("Image not found");
+            const bytes = (await imageResponse.blob()).size;
+            totalBytes += bytes;
+            addImageRow(byId("published-list"), path, bytes);
+          } catch {
+            unavailable++;
+            const item = document.createElement("li");
+            item.textContent = path + " · Unavailable";
+            byId("published-list").append(item);
+          }
+        }
+
+        const percent = Math.round((totalBytes / TOTAL_IMAGE_BUDGET) * 100);
+        byId("published-total").textContent = readableSize(totalBytes) + " / 5 MiB";
+        byId("published-fill").style.width = Math.min(percent, 100) + "%";
+        byId("published-fill").classList.toggle("over", totalBytes > TOTAL_IMAGE_BUDGET);
+        byId("published-meter").setAttribute("aria-valuenow", Math.min(percent, 100));
+        byId("published-note").textContent = paths.length === 0
+          ? "No sticker images linked yet. Upload artwork and add its path to products.json."
+          : paths.length + " linked image(s) · " + percent + "% of suggested budget" +
+            (unavailable ? " · " + unavailable + " unavailable" : "");
+      } catch (error) {
+        byId("inventory-status").textContent = "Couldn't read the catalog. Check products.json.";
+        byId("published-total").textContent = "Image check unavailable";
+        byId("published-note").textContent = "Open this page on your hosted website, not as a local file.";
+        console.error("Control Room:", error);
+      }
+    }
+
+    // 🩵 STEP 3: Check selected pictures on this device. No uploading occurs.
+    byId("image-files").addEventListener("change", (event) => {
+      const files = Array.from(event.target.files || []);
+      const list = byId("local-list");
+      list.replaceChildren();
+      const total = files.reduce((sum, file) => sum + file.size, 0);
+      byId("local-total").textContent = files.length
+        ? files.length + " file(s) · " + readableSize(total)
+        : "No files selected";
+      files.forEach((file) => addImageRow(list, file.name, file.size));
+    });
+
+    loadDashboard();
+  </script>
+</body>
+</html>
