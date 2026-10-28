@@ -48,7 +48,13 @@
       <p class="eyebrow">✳ DROP 001 / THE COLLECTION</p>
       <h2 id="drops-title">STICKER <span class="highlight">DROPS!</span></h2>
       <p class="muted">Swipe sideways to explore 10 colorful sample concepts. Finished artwork and eBay listings are coming later.</p>
-      <div id="products" class="products" aria-label="Swipeable sticker collection"></div>
+      <!-- 💙 Carousel controls: buttons work with touch swiping and keyboard arrows. -->
+      <div class="carousel-controls" aria-label="Sticker carousel controls">
+        <button class="carousel-arrow" id="sticker-prev" type="button" aria-label="Previous sticker">←</button>
+        <span id="sticker-position" role="status" aria-live="polite">Loading stickers…</span>
+        <button class="carousel-arrow" id="sticker-next" type="button" aria-label="Next sticker">→</button>
+      </div>
+      <div id="products" class="products" aria-label="Swipeable sticker collection" tabindex="0"></div>
       <p class="muted">Planned: 10 per design. These are preview concepts, not available inventory; future sales and availability will be handled on eBay.</p>
     </section>
 
