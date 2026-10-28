@@ -19,4 +19,22 @@
 <p>Recommended: 1200 × 1200 px WebP for most sticker previews. Keep your full-quality print masters elsewhere.</p>
 <p class="jar-note">The published meter counts only unique image paths referenced by products.json that can be measured. It does not include unreferenced files, portfolio images, CSS, JavaScript, or GitHub account storage. Image sizes alone cannot predict exact loading speed.</p>
 <p><a class="button" href="https://github.com/Wonka15/Little-Sticker-Shop/tree/main/images" target="_blank" rel="noopener noreferrer">Open images folder on GitHub ↗</a></p>
-</section></main><footer>© Curbside Stickers · Image Jar</footer><script src="image-jar.js" defer></script></body></html>
+</section></main><footer>© Curbside Stickers · Image Jar</footer><script>
+const limit=512000,budget=5242880;
+const el=id=>document.getElementById(id);
+const size=n=>(n/1024).toFixed(0)+" KB";
+function row(list,name,bytes){const li=document.createElement("li");li.textContent=name+" — "+size(bytes)+(bytes>limit?" ⚠ Large":" ✓");list.append(li);}
+async function check(){
+ try{
+  const res=await fetch("products.json");if(!res.ok)throw Error("Catalog unavailable");
+  const data=await res.json();let total=0;
+  const paths=[...new Set(data.products.map(p=>p.image).filter(p=>typeof p==="string"&&p.startsWith("images/")&&!p.includes("..")))];
+  for(const path of paths){try{const r=await fetch(path);if(!r.ok)throw Error("Not found");const bytes=(await r.blob()).size;total+=bytes;row(el("published-list"),path,bytes);}catch(e){const li=document.createElement("li");li.textContent=path+" — unavailable";el("published-list").append(li);}}
+  const pct=Math.round(total/budget*100);el("published-total").textContent=size(total)+" / 5120 KB ("+pct+"% of suggested budget)";
+  el("published-fill").style.width=Math.min(pct,100)+"%";el("published-meter").setAttribute("aria-valuenow",Math.min(pct,100));
+  el("published-note").textContent=paths.length?"Only images referenced in products.json are counted.":"No uploaded images referenced yet.";
+ }catch(e){el("published-total").textContent="Unable to check catalog";}
+}
+el("image-files").addEventListener("change",e=>{const files=[...e.target.files];el("local-list").replaceChildren();el("local-total").textContent=files.length+" images · "+size(files.reduce((n,f)=>n+f.size,0));files.forEach(f=>row(el("local-list"),f.name,f.size));});
+check();
+</script></body></html>
