@@ -1,4 +1,4 @@
-# 🚚 Curbside Stickers — Move Your Website to Another Host
+# 🚚 Otter Stickers — Move Your Website to Another Host
 
 **Beginner-friendly migration guide** · Works with conventional static-file hosting, including HoboHost **if your chosen plan supports uploading HTML, CSS, JavaScript, JSON, and images**.
 
@@ -20,7 +20,7 @@ Your public website is made of ordinary files. **No database, Node.js server, bu
 
 ## 🟨 Step 1 — Download a complete backup from GitHub
 
-1. Open [the Curbside Stickers repository](https://github.com/Wonka15/Little-Sticker-Shop).
+1. Open [the Otter Stickers repository](https://github.com/Wonka15/Little-Sticker-Shop).
 2. Choose **Code → Download ZIP**.
 3. Save the ZIP to your iPad Files app or computer.
 4. Extract/uncompress it. The ZIP usually contains a parent folder named something like `Little-Sticker-Shop-main`.
