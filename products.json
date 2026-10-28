@@ -111,5 +111,17 @@
       "status": "coming-soon",
       "visible": true
     }
-  ]
+  ],
+  "_beginnerGuide": "🩷 PINK / STICKER DATA: edit name, description, price, editionSize, image, ebayUrl, status, visible. JSON cannot contain // comments. Keep double quotes and commas.",
+  "_fieldGuide": {
+    "id": "Stable unique identifier; avoid changing after publishing.",
+    "name": "Sticker title shown on site.",
+    "description": "Short text below sticker.",
+    "price": "Display price in USD (number).",
+    "editionSize": "Planned copies; NOT synced to eBay.",
+    "image": "Path such as images/robot.webp; blank uses demo artwork.",
+    "ebayUrl": "Real HTTPS eBay listing URL; leave blank until ready.",
+    "status": "coming-soon, available, or sold-out.",
+    "visible": "true displays the card; false hides it."
+  }
 }
