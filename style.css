@@ -11,6 +11,14 @@
   Tip: edit ONE value, save, then refresh the page to see the result.
 */
 
+/* 💚 GREEN / CSS MAP
+   COLORS: edit the :root variables in section 16 for the current brand palette.
+   SIZES: px = fixed pixels, rem = scalable text-based units, % = relative.
+   MOBILE: @media rules adapt the layout to narrow screens.
+   IMPORTANT: later CSS rules can override earlier ones.
+   Avoid deleting older rules until you understand the cascade.
+*/
+
 /* 1. GLOBAL COLORS AND DEFAULTS */
 :root {
   font-family: ui-rounded, system-ui, -apple-system, sans-serif;
