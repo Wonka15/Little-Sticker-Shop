@@ -198,3 +198,26 @@ Tap the GitHub links to edit your products, portfolio, and images or check deplo
 
 ### 🧑‍🎨 Beginner rule
 **HTML** builds the page, **CSS** styles it, **JavaScript** reads your catalog and updates the dashboard, and **JSON** stores your sticker information. You can safely start by editing JSON only.
+
+---
+
+## 🧑‍💻 11 — READ THE NEW COLOR-CODED SOURCE COMMENTS
+
+All eight website source/data files now include beginner explanations. In HTML, look for `<!-- 💙 ... -->`; in CSS/JavaScript, look for `/* 💚 ... */` or `// 🧡 ...`. **Comments explain code but do not appear as normal website text.**
+
+| Color | File | What it teaches |
+| --- | --- | --- |
+| 💙 Blue | [index.html](index.html) | Sections, navigation, and gallery containers |
+| 💚 Green | [style.css](style.css) | Selectors, CSS variables, sizes, and mobile layouts |
+| 🧡 Orange | [catalog.js](catalog.js) | Loading JSON, demo art, and sticker cards |
+| 💛 Yellow | [portfolio.js](portfolio.js) | Building portfolio cards |
+| 🩷 Pink | [products.json](products.json) | Every editable sticker field |
+| 💜 Purple | [projects.json](projects.json) | Every editable project field |
+| 🩵 Cyan | [image-jar.html](image-jar.html) | Dashboard and image budget calculations |
+| 🤍 White | [policies.html](policies.html) | Customer policy wording |
+
+**Why JSON looks different:** JSON does not allow ordinary `//` comments. Its explanatory text lives in fields called `_beginnerGuide` and `_fieldGuide`, which the website ignores.
+
+**Best learning order:** Start with products.json, then index.html, then style.css. Save JavaScript for later. Change one thing at a time and check the result on your website.
+
+**Important:** GitHub's editor may use its own syntax-highlighting colors. Our emoji labels make the file categories recognizable even if your editor theme changes.
