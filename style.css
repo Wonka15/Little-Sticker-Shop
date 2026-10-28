@@ -437,3 +437,63 @@ footer { background: var(--ink); color: var(--paper); border-top: 5px solid var(
   .products { scroll-behavior: auto; }
   .products .product { transition: none; filter: none; }
 }
+
+/* 20. ✨ POLISHED HERO — bubbly type + tactile, pressable call-to-action.
+   Beginner tip: change --hero-glow to adjust the soft pink halo.
+   The button moves DOWN when pressed, like a real arcade button. */
+:root { --hero-glow: rgba(255, 75, 130, .33); }
+.hero h1 {
+  font-family: "Arial Rounded MT Bold", "Trebuchet MS", ui-rounded, system-ui, sans-serif;
+  font-weight: 1000;
+  letter-spacing: -.055em;
+  line-height: .99;
+  text-wrap: balance;
+}
+.hero h1 em {
+  -webkit-text-stroke: 0;
+  color: var(--red);
+  text-shadow: 3px 4px 0 var(--ink);
+}
+.hero .hero-kicker {
+  font-family: "Arial Rounded MT Bold", "Trebuchet MS", ui-rounded, system-ui, sans-serif;
+  letter-spacing: -.025em;
+  font-weight: 1000;
+}
+.hero-copy > p:not(.hero-kicker) {
+  font-size: clamp(1rem, 1.7vw, 1.1rem);
+  line-height: 1.7;
+  max-width: 34rem;
+}
+.hero-copy > .button {
+  position: relative;
+  isolation: isolate;
+  background: var(--pink);
+  border: 3px solid var(--ink);
+  border-radius: 999px;
+  padding: 17px 27px;
+  font-family: "Arial Rounded MT Bold", "Trebuchet MS", ui-rounded, system-ui, sans-serif;
+  font-size: 1rem;
+  font-weight: 1000;
+  letter-spacing: .01em;
+  box-shadow: 0 7px 0 var(--ink), 0 13px 26px var(--hero-glow);
+  transform: translateY(0);
+  transition: transform .16s ease, box-shadow .16s ease, background .16s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.hero-copy > .button:hover {
+  background: #ffa9d1;
+  transform: translateY(-2px);
+  box-shadow: 0 9px 0 var(--ink), 0 16px 30px var(--hero-glow);
+}
+.hero-copy > .button:active {
+  transform: translateY(6px);
+  box-shadow: 0 1px 0 var(--ink), 0 3px 10px var(--hero-glow);
+  background: #ffb5d8;
+}
+.hero-copy > .button:focus-visible {
+  outline: 3px dashed var(--ink);
+  outline-offset: 7px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-copy > .button { transition: none; }
+}
