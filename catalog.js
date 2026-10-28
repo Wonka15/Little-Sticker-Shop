@@ -160,7 +160,8 @@ async function loadCatalog() {
       productGrid.append(element("p", "muted", "New sticker drops are on the way!"));
       return;
     }
-    visible.forEach(renderProduct);\n    setupStickerCarousel();
+    visible.forEach(renderProduct);
+    setupStickerCarousel();
   } catch (error) {
     console.error("Catalog error:", error);
     productGrid.append(element("p", "muted", "Sticker listings are temporarily unavailable. Please check back soon."));
@@ -213,7 +214,7 @@ function setupStickerCarousel() {
     // Center the chosen card without changing the page's vertical position.
     const left = target.offsetLeft - productGrid.offsetLeft -
       (productGrid.clientWidth - target.offsetWidth) / 2;
-    productGrid.scrollTo({ left, behavior: reducedMotion.matches ? "instant" : "smooth" });
+    productGrid.scrollTo({ left, behavior: reducedMotion.matches ? "auto" : "smooth" });
     scheduleFocus();
   }
 
