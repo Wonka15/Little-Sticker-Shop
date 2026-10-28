@@ -4,13 +4,17 @@
   Beginner tip: Add and remove projects in projects.json, NOT this script.
   Text is inserted safely as text, never interpreted as HTML.
 */
+// 💛 STEP 1: Find the portfolio container on the homepage.
 const portfolio = document.querySelector("#portfolio-projects");
+// 💛 STEP 2: Small reusable helper for making safe HTML elements.
 const make = (tag, className, text) => {
   const node = document.createElement(tag);
   if (className) node.className = className;
   if (text !== undefined) node.textContent = text;
   return node;
 };
+// 💛 STEP 3: Read projects.json and build a card for each visible project.
+// To publish a project, change visible to true in projects.json.
 async function loadPortfolio() {
   if (!portfolio) return;
   try {
@@ -23,6 +27,7 @@ async function loadPortfolio() {
       if (!project || project.visible === false) continue;
       const card = make("article", "portfolio-card");
       const art = make("div", "portfolio-art");
+      // An empty image path shows the friendly placeholder instead.
       const path = typeof project.image === "string" ? project.image : "";
       if (/^images\/[a-zA-Z0-9_./-]+\.(webp|png|jpg|jpeg)$/i.test(path) && !path.includes("..")) {
         const image = make("img");
