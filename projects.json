@@ -9,5 +9,14 @@
       "url": "",
       "visible": false
     }
-  ]
+  ],
+  "_beginnerGuide": "💜 PURPLE / PORTFOLIO DATA: change project details here. JSON does not support ordinary comments. Use double quotes and keep commas.",
+  "_fieldGuide": {
+    "title": "Name of your project.",
+    "category": "Type of creative work.",
+    "description": "Short summary.",
+    "image": "Optional images/filename.webp path.",
+    "url": "Optional public HTTPS project link.",
+    "visible": "Set true to publish the project."
+  }
 }
