@@ -1,3 +1,11 @@
+# 🦦 Otter Stickers
+
+[![🌐 OPEN THE LIVE OTTER STICKERS WEBSITE](https://img.shields.io/badge/%F0%9F%8C%90_OPEN_THE_WEBSITE-OTTER_STICKERS-167f85?style=for-the-badge)](https://wonka15.github.io/Little-Sticker-Shop/)
+
+**🔗 [Tap here to visit the live website](https://wonka15.github.io/Little-Sticker-Shop/)** — works on iPhone, iPad, and desktop.
+
+---
+
 ## 🎨 Start here: Color-coded editing handbook
 
 **New to editing the site?** Open [HANDBOOK.md](HANDBOOK.md) for the color-coded map of every file, sticker image export sizes, editing instructions, portfolio projects, and eBay links.
