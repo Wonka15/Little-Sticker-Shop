@@ -384,3 +384,56 @@ footer { background: var(--ink); color: var(--paper); border-top: 5px solid var(
   .cartoon-robot { transform: rotate(-10deg) scale(.83); transform-origin: top left; }
   .cartoon-board { transform: rotate(-17deg) scale(.82); transform-origin: bottom right; }
 }
+
+/* 19. 🛹 COVER-FLOW STICKER CAROUSEL
+   The centered card grows; neighboring cards gently shrink and fade.
+   Touch scrolling still works normally. The buttons also work on desktop.
+*/
+.products {
+  scroll-padding-inline: 0;
+  padding: 22px max(12px, calc((100% - min(74vw, 380px)) / 2)) 34px;
+  align-items: stretch;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+}
+.products .product {
+  flex: 0 0 min(74vw, 380px);
+  scroll-snap-align: center;
+  transform: scale(.88);
+  opacity: .72;
+  filter: saturate(.7);
+  transition: transform .32s ease, opacity .32s ease, filter .32s ease, box-shadow .32s ease;
+  will-change: transform;
+}
+.products .product.is-focused {
+  transform: scale(1);
+  opacity: 1;
+  filter: none;
+  box-shadow: 9px 9px 0 var(--ink);
+}
+.carousel-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin: 18px 0 8px;
+}
+.carousel-arrow {
+  border: 3px solid var(--ink);
+  border-radius: 50%;
+  width: 46px;
+  height: 46px;
+  background: var(--yellow);
+  color: var(--ink);
+  font-size: 1.4rem;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 var(--ink);
+}
+.carousel-arrow:disabled { opacity: .35; cursor: default; box-shadow: none; }
+.carousel-arrow:focus-visible, .products:focus-visible { outline: 3px dashed var(--red); outline-offset: 4px; }
+#sticker-position { font-weight: 900; min-width: 55px; text-align: center; }
+@media (prefers-reduced-motion: reduce) {
+  .products { scroll-behavior: auto; }
+  .products .product { transition: none; filter: none; }
+}
