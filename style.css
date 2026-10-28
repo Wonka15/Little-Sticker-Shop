@@ -659,3 +659,114 @@ footer { border-top-color: #167f85; }
   .otter-emoji { font-size: 4rem; }
   .otter-caption { font-size: .52rem; }
 }
+
+/* 24. 🛹 ROBOT RIDES THE BOARD — one responsive illustration scene.
+   The board and robot share the SAME coordinate system, preventing overlap.
+   The otter is a grip-tape graphic, not a separate floating sticker. */
+.hero-art {
+  min-height: 390px;
+  display: grid;
+  place-items: center;
+  overflow: visible;
+}
+.skate-scene {
+  position: relative;
+  width: 310px;
+  height: 360px;
+  max-width: 100%;
+  margin-inline: auto;
+}
+.skate-scene .cartoon-robot {
+  position: absolute;
+  top: 10px;
+  left: 55px;
+  width: 200px;
+  height: 272px;
+  transform: rotate(-5deg);
+  transform-origin: 50% 90%;
+  z-index: 3;
+}
+.skate-scene .robot-feet {
+  bottom: -1px;
+  left: 53px;
+  box-shadow: 67px 0 var(--ink);
+}
+.skate-scene .cartoon-board {
+  position: absolute;
+  width: 285px;
+  height: 120px;
+  left: 12px;
+  right: auto;
+  bottom: 0;
+  transform: rotate(-4deg);
+  filter: drop-shadow(6px 8px 0 #102c3a30);
+  z-index: 2;
+}
+.skate-scene .board-deck {
+  top: 6px;
+  height: 72px;
+  background: #164d59;
+  border: 7px solid #f6fffa;
+  outline: 4px solid var(--ink);
+  color: #f6fffa;
+  text-shadow: none;
+  gap: 8px;
+  overflow: hidden;
+  justify-content: flex-end;
+  padding-right: 25px;
+}
+.skate-scene .board-deck::before {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  opacity: .22;
+  background-image: radial-gradient(#d3f7ee 1px, transparent 1px);
+  background-size: 6px 6px;
+}
+.griptape-otter {
+  position: relative;
+  font-size: 2.65rem;
+  line-height: 1;
+  transform: rotate(-9deg);
+  filter: drop-shadow(1px 2px 0 #102c3a);
+}
+.griptape-wordmark {
+  position: relative;
+  font-family: "Arial Rounded MT Bold", "Trebuchet MS", system-ui, sans-serif;
+  font-size: .95rem;
+  letter-spacing: .035em;
+  font-weight: 1000;
+}
+.skate-scene .board-wheel { top: 78px; background: #6fc4dc; }
+.skate-scene .wheel-one { left: 45px; }
+.skate-scene .wheel-two { right: 45px; }
+.hero-art .hero-scribble {
+  z-index: 4;
+  top: 5px;
+  right: 0;
+  font-family: "Arial Rounded MT Bold", "Trebuchet MS", ui-rounded, sans-serif;
+  font-size: 1rem;
+  text-align: center;
+  color: var(--ink);
+}
+/* A consistent bubbly headline with less cramped spacing on narrow screens. */
+.hero h1 {
+  font-family: ui-rounded, "Arial Rounded MT Bold", "Trebuchet MS", system-ui, sans-serif;
+  font-size: clamp(3.1rem, 6.4vw, 6.2rem);
+  font-weight: 900;
+  letter-spacing: -.045em;
+  line-height: 1.03;
+}
+.hero h1 em { display: inline-block; }
+.hero-copy { min-width: 0; }
+@media (max-width: 760px) {
+  .hero-art { min-height: 380px; }
+  .hero-art .hero-scribble { right: 3%; }
+  .hero h1 { font-size: clamp(3.1rem, 10vw, 5.3rem); }
+}
+@media (max-width: 370px) {
+  .hero-art { min-height: 340px; }
+  .skate-scene { transform: scale(.88); transform-origin: center center; }
+  .skate-scene .cartoon-robot { transform: rotate(-5deg); }
+  .skate-scene .cartoon-board { transform: rotate(-4deg); }
+}
