@@ -831,3 +831,33 @@ footer { border-top-color: #167f85; }
   .hero h1 .hero-small-line { font-size: .48em; }
   .hero h1 .hero-big-line { font-size: clamp(2.3rem, 10vw, 4.8rem); letter-spacing: -.055em; }
 }
+
+/* 27. 🦦 GRIPTAPE ALIGNMENT FIX
+   Center the otter independently of the CURBSIDE label.
+   Flex centering previously pushed the emoji sideways on narrow screens. */
+.skate-scene .board-deck {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+.skate-scene .griptape-otter {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  margin: 0;
+  transform: translate(-50%, -50%) rotate(-7deg);
+  transform-origin: center;
+  line-height: 1;
+  font-size: 2.45rem;
+}
+.skate-scene .griptape-wordmark {
+  position: absolute;
+  z-index: 2;
+  right: 13px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: .68rem;
+  letter-spacing: .01em;
+}
