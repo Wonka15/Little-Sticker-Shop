@@ -770,3 +770,44 @@ footer { border-top-color: #167f85; }
   .skate-scene .cartoon-robot { transform: rotate(-5deg); }
   .skate-scene .cartoon-board { transform: rotate(-4deg); }
 }
+
+/* 25. 💜 SPARKLING PURPLE 3D ANTENNA
+   Pure CSS: no downloads, no scripts. Subtle animation and reduced-motion support. */
+.skate-scene .robot-antenna {
+  isolation: isolate;
+  background: linear-gradient(90deg, #344c7d 0%, #a2a8ff 36%, #f3ddff 54%, #6546a7 100%);
+  box-shadow: inset -2px 0 2px #30245d, 0 0 12px #b67cff99, 0 0 22px #8c5cff77;
+}
+.skate-scene .robot-antenna::before {
+  background: radial-gradient(circle at 32% 23%, #fff 0 9%, #f4c5ff 19%, #b779ff 45%, #6a36d4 80%);
+  box-shadow: inset -4px -5px 5px #55239c, 0 0 9px #f7d3ff, 0 0 20px #b35cff, 0 0 36px #9147ffbb;
+  animation: otter-antenna-pulse 2.7s ease-in-out infinite;
+}
+.skate-scene .robot-antenna::after {
+  content: "✦";
+  position: absolute;
+  top: -39px;
+  left: -18px;
+  width: 55px;
+  height: 55px;
+  display: grid;
+  place-items: center;
+  color: #f9dcff;
+  font: 900 35px/1 system-ui, sans-serif;
+  text-shadow: 0 0 4px white, 0 0 12px #d788ff, 0 0 22px #933dff;
+  filter: drop-shadow(0 0 6px #b65dff);
+  animation: otter-antenna-sparkle 2.7s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes otter-antenna-pulse {
+  0%, 100% { box-shadow: inset -4px -5px 5px #55239c, 0 0 9px #f7d3ff, 0 0 20px #b35cff, 0 0 32px #9147ff99; }
+  50% { box-shadow: inset -4px -5px 5px #55239c, 0 0 15px white, 0 0 30px #c86cff, 0 0 48px #9147ffdd; }
+}
+@keyframes otter-antenna-sparkle {
+  0%, 100% { opacity: .6; transform: rotate(-12deg) scale(.75); }
+  50% { opacity: 1; transform: rotate(18deg) scale(1.18); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .skate-scene .robot-antenna::before,
+  .skate-scene .robot-antenna::after { animation: none; }
+}
