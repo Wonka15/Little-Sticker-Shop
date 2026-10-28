@@ -883,3 +883,49 @@ footer { border-top-color: #167f85; }
   right: 17px;
   font-size: .75rem;
 }
+
+/* 29. 🦦 CLEAN SKATEBOARD + OTTER MASCOT
+   No cramped emoji or lettering on the grip tape.
+   Otter gets its own sticker-style spot, clear of the robot and wheels. */
+.skate-scene .board-deck {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  background: linear-gradient(155deg, #245b66, #123e49);
+}
+.skate-scene .board-grip-detail {
+  position: relative;
+  z-index: 2;
+  color: #a4e8d7;
+  font: 900 1.6rem/1 system-ui, sans-serif;
+  text-shadow: 0 0 12px #a4e8d788;
+}
+.hero-art .otter-mascot {
+  position: absolute;
+  z-index: 5;
+  right: 2%;
+  bottom: 16%;
+  width: 84px;
+  height: 84px;
+  display: grid;
+  place-items: center;
+  border: 5px solid #f6fffa;
+  outline: 3px solid var(--ink);
+  border-radius: 50%;
+  background: #b8edcf;
+  box-shadow: 5px 7px 0 #102c3a33;
+  transform: rotate(12deg);
+  pointer-events: none;
+}
+.hero-art .otter-mascot span {
+  font: 3.4rem/1 "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+}
+@media (max-width: 760px) {
+  .hero-art .otter-mascot { right: 3%; bottom: 14%; width: 76px; height: 76px; }
+  .hero-art .otter-mascot span { font-size: 3rem; }
+}
+@media (max-width: 370px) {
+  .hero-art .otter-mascot { right: 1%; bottom: 11%; width: 65px; height: 65px; }
+  .hero-art .otter-mascot span { font-size: 2.6rem; }
+}
